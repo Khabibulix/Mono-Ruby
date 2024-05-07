@@ -9,7 +9,13 @@ def substrings(str_to_check, data_structure_to_seek)
     for sliced_str in -str_to_check.length + 1...0
         result[str_to_check.slice(-sliced_str..)] = data_structure_to_seek.count(str_to_check.slice(-sliced_str..))
     end
-    
+
+    result.each do |key, value|
+        if value == 0
+            result.delete(key)
+        end
+    end
+
     puts result
 end
 
