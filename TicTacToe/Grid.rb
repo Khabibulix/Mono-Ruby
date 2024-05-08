@@ -7,14 +7,20 @@ class Grid < Case
     end
 
     def create_grid()
+        grid_array = Array.new(self.width) {Array.new(self.width)}
         for row in 0...self.width
             for col in 0...self.width
-                print(".  ")
+                grid_array[row][col] = Case.new(".")
             end
-            print("\n")
         end
+        grid_array
 
     end
+
+    def display_grid()
+    
+    end
+
 
     # def is_grid_full(self)
     # end
@@ -28,4 +34,3 @@ class Grid < Case
 end
 
 grid = Grid.new(3)
-grid.create_grid
