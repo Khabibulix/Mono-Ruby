@@ -18,7 +18,13 @@ class Grid < Case
     end
 
     def display_grid()
-    
+        grid = create_grid
+        for row in 0...3
+            for col in 0...3
+                print grid[row][col].content
+            end
+            puts ""
+        end
     end
 
 
@@ -34,3 +40,4 @@ class Grid < Case
 end
 
 grid = Grid.new(3)
+grid.display_grid
