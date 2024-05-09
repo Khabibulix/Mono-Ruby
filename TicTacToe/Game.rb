@@ -26,22 +26,35 @@ class Game
         end
     end
 
+    # def launch_the_game()
+    # end
+
     # def check_for_end_of_game()
+        #Besoin de check_for_victory
     # end
 
     # def check_for_victory()
     # end
 
-    # def get_player_input()
+    def asking_for_input_for_player()
+        puts "Please enter the row of the cell you want to play"
+        row = gets.chomp
+        puts "Please enter the column of the cell you want to play"
+        col = gets.chomp
+        "#{row},#{col}"
+    end
+
+    # def checking_for_input_for_player(row, col)
     # end
 
-    # def get_computer_input()
+    # def get_player_turn_input()
+        
+    # end
+
+    # def get_computer_turn_input()
     # end
 
 end
 
 game = Game.new(Grid.new(3))
-game.get_symbol_for_player
-p game.player_symbol
-game.check_for_player_symbol_and_computer_symbol_inequality
-p game.computer_symbol
+p game.asking_for_input_for_player
