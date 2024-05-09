@@ -22,34 +22,31 @@ class Grid < Cell
         grid[row][col].change_content(content)
     end
 
+    # def is_grid_full(self)
+    # end
+
+    def empty_the_grid()
+        for row in 0...3
+            for col in 0...3
+                self.grid[row][col].change_content(".")
+            end
+        end
+    end
+
+    # def get_empty_cells(self)
+    # end
+
     private
     def create_grid()
         grid_array = Array.new(self.width) {Array.new(self.width)}
         for row in 0...self.width
             for col in 0...self.width
-                grid_array[row][col] = Cell.new("x")
+                grid_array[row][col] = Cell.new(".")
             end
         end
         grid_array
 
-    end
-
-
-    # def is_grid_full(self)
-    # end
-
-    # def empty_the_grid()
-    #     for row in 0...3
-    #         for col in 0...3
-    #             self.grid[row][col].content = "."
-    #         end
-    #     end
-    # end
-
-    # def get_empty_cells(self)
-    # end
-
-    
+    end    
 
 end
 
@@ -58,4 +55,7 @@ p "Old grid"
 grid.display_grid
 grid.edit_the_grid(1, 1, "O")
 p "New grid"
+grid.display_grid
+p "Clearing grid?"
+grid.empty_the_grid
 grid.display_grid
