@@ -8,6 +8,7 @@ We want a console application that will:
 . Update the grid using user inputs
 . Respect the OOP principles
 
+<pre>
 I have 3 classes:
 . First one is Cell that only have a content that is editable.
 
@@ -24,4 +25,4 @@ I have 3 classes:
     .Check_for_player_symbol_and_computer_symbol_inequality: Self explanatory, if by bad luck the symbols are the same we change computer one.
     .Asking_for_input_for_player: We ask for coordinates for cell that will be modified
     .Is_input_valid_for_player: We check if coordinates asked are not sh**
-    
+</pre>
