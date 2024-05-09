@@ -1,10 +1,11 @@
 require './Grid.rb'
 
 class Game
-    attr_reader :grid, :player_symbol
+    attr_reader :grid, :player_symbol, :computer_symbol
     def initialize(grid)
         @grid = grid
         @player_symbol = ""
+        @computer_symbol = "X"
     end
 
     def get_symbol_for_player()
@@ -17,6 +18,12 @@ class Game
             @player_symbol += player_symbol
         end
 
+    end
+
+    def check_for_player_symbol_and_computer_symbol_inequality()
+        if @computer_symbol == @player_symbol
+            @computer_symbol = "O"
+        end
     end
 
     # def check_for_end_of_game()
@@ -36,3 +43,5 @@ end
 game = Game.new(Grid.new(3))
 game.get_symbol_for_player
 p game.player_symbol
+game.check_for_player_symbol_and_computer_symbol_inequality
+p game.computer_symbol
