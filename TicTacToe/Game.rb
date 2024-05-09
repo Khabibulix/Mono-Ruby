@@ -28,22 +28,43 @@ class Game
     
 
     def asking_for_input_for_player()
-        puts "Please enter the row of the cell you want to play"
+        puts "\nGrid is currently like this:"
+        @grid.display_grid
+        puts "\nPlease enter the row of the cell you want to play"
         row = gets.chomp
         puts "Please enter the column of the cell you want to play"
         col = gets.chomp
-        if !is_input_valid_for_player(row,col)
+
+        case is_input_valid_for_player(row, col)
+        when "No method Error"
+            puts "Enter a number between 1 and #{@grid.width} please"
+            asking_for_input_for_player
+        when "NaN value"
+            puts "Enter a number between 1 and #{@grid.width} please"
+            asking_for_input_for_player
+        when false
             puts "Sorry cell is already used"
             asking_for_input_for_player
         else
-            #We change value
+            return "#{row},#{col}"
         end
-
     end
 
     def is_input_valid_for_player(row, col)
-        grid.get_cell(row.to_i, col.to_i).content == "."
+        
+        begin
+            if !!Float(row) && !!Float(col)
+                return grid.get_cell(row.to_i, col.to_i).content == "."
+            end
+        rescue NoMethodError
+            return "No method Error"
+        rescue ArgumentError
+            return "NaN value"
+        end
     end
+
+    # def edit_the_grid_using_player_input()
+    # end
 
     # def launch_the_game()
     # end
@@ -54,12 +75,11 @@ class Game
 
     # def check_for_victory()
     # end
-    
+
     # def get_computer_turn_input()
     # end
 
 end
 
 game = Game.new(Grid.new(3))
-game.grid.display_grid
-game.asking_for_input_for_player
+p game.asking_for_input_for_player
