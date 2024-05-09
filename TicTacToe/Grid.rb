@@ -18,19 +18,13 @@ class Grid < Cell
         grid
     end
 
-    def edit_the_grid(row, col, content)
-        grid[row][col].change_content(content)
+    def get_cell(row, col)
+        self.grid[row][col]
     end
 
-    def is_grid_full()
-        result_array = []
-        for row in grid do
-            row.each do |cell|
-                result_array.push(cell.content == ".")              
-            end
-        end
-        result_array.none?
-    end
+    def edit_the_grid(row, col, content)
+        grid[row][col].change_content(content)
+    end    
 
     def clear_the_grid()
         for row in 0...@width
@@ -39,6 +33,18 @@ class Grid < Cell
             end
         end
     end
+
+    private
+    def create_grid()
+        grid_array = Array.new(@width) {Array.new(@width)}
+        for row in 0...@width
+            for col in 0...@width
+                grid_array[row][col] = Cell.new("x")
+            end
+        end
+        grid_array
+    end    
+    
 
     def get_empty_cells()
         empty_cells_array = []
@@ -53,22 +59,14 @@ class Grid < Cell
         empty_cells_array
     end
 
-    private
-    def create_grid()
-        grid_array = Array.new(@width) {Array.new(@width)}
-        for row in 0...@width
-            for col in 0...@width
-                grid_array[row][col] = Cell.new("x")
+    def is_grid_full()
+        result_array = []
+        for row in grid do
+            row.each do |cell|
+                result_array.push(cell.content == ".")              
             end
         end
-        grid_array
-
-    end    
+        result_array.none?
+    end
 
 end
-
-grid = Grid.new(3)
-grid.edit_the_grid(0, 1, ".")
-grid.edit_the_grid(2, 1, ".")
-grid.display_grid
-p grid.get_empty_cells.length
