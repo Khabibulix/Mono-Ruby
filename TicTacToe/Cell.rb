@@ -8,8 +8,3 @@ class Cell
       @content = new_content
     end
 end
-
-cell = Cell.new(".")
-p cell.content
-cell.change_content("0")
-p cell.content

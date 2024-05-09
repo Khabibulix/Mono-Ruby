@@ -39,7 +39,7 @@ class Grid < Cell
         grid_array = Array.new(@width) {Array.new(@width)}
         for row in 0...@width
             for col in 0...@width
-                grid_array[row][col] = Cell.new("x")
+                grid_array[row][col] = Cell.new(".")
             end
         end
         grid_array

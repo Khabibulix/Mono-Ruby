@@ -25,6 +25,25 @@ class Game
             @computer_symbol = "O"
         end
     end
+    
+
+    def asking_for_input_for_player()
+        puts "Please enter the row of the cell you want to play"
+        row = gets.chomp
+        puts "Please enter the column of the cell you want to play"
+        col = gets.chomp
+        if !is_input_valid_for_player(row,col)
+            puts "Sorry cell is already used"
+            asking_for_input_for_player
+        else
+            #We change value
+        end
+
+    end
+
+    def is_input_valid_for_player(row, col)
+        grid.get_cell(row.to_i, col.to_i).content == "."
+    end
 
     # def launch_the_game()
     # end
@@ -35,26 +54,12 @@ class Game
 
     # def check_for_victory()
     # end
-
-    def asking_for_input_for_player()
-        puts "Please enter the row of the cell you want to play"
-        row = gets.chomp
-        puts "Please enter the column of the cell you want to play"
-        col = gets.chomp
-        "#{row},#{col}"
-    end
-
-    # def checking_for_input_for_player(row, col)
-    # end
-
-    # def get_player_turn_input()
-        
-    # end
-
+    
     # def get_computer_turn_input()
     # end
 
 end
 
 game = Game.new(Grid.new(3))
-p game.asking_for_input_for_player
+game.grid.display_grid
+game.asking_for_input_for_player
