@@ -4,12 +4,14 @@ Credits: The Odin Project, there:
 https://www.theodinproject.com/lessons/ruby-tic-tac-toe
 
 We want a console application that will:
+<pre>
 . Display a game of Tic Tac Toe
 . Update the grid using user inputs
 . Respect the OOP principles
+</pre>
 
-<pre>
 I have 3 classes:
+<pre>
 . First one is Cell that only have a content that is editable.
 
 . Second one is Grid that has access to Cell. A Grid has a @width and its methods are:
