@@ -29,7 +29,7 @@ class Grid < Cell
                 result_array.push(cell.content == ".")              
             end
         end
-        p result_array.none?
+        result_array.none?
     end
 
     def clear_the_grid()
@@ -40,8 +40,18 @@ class Grid < Cell
         end
     end
 
-    # def get_empty_cells(self)
-    # end
+    def get_empty_cells()
+        empty_cells_array = []
+        for row in 0...@width
+            for col in 0...@width
+                cell = self.grid[row][col]
+                if cell.content == "."
+                    empty_cells_array.push(cell)
+                end
+            end
+        end
+        empty_cells_array
+    end
 
     private
     def create_grid()
@@ -58,14 +68,7 @@ class Grid < Cell
 end
 
 grid = Grid.new(3)
-# grid.display_grid
-grid.is_grid_full
-# p "Old grid"
-# grid.display_grid
-# grid.edit_the_grid(1, 1, "O")
-# grid.edit_the_grid(1, 2, "O")
-# p "New grid"
-# grid.display_grid
-# p "Clearing grid?"
-# grid.clear_the_grid
-# grid.display_grid
+grid.edit_the_grid(0, 1, ".")
+grid.edit_the_grid(2, 1, ".")
+grid.display_grid
+p grid.get_empty_cells.length
