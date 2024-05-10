@@ -27,6 +27,7 @@ class Grid < Cell
         for row in grid
             row_array.push(row)
         end
+        row_array
     end
 
     def get_cols()
@@ -34,6 +35,20 @@ class Grid < Cell
         for col in grid
             col_array.push(col)
         end
+        col_array
+    end
+
+    def get_diagonals()
+        diagonal_array = []
+        col_index = 2
+        for cell_row_and_col in 0...3
+            diagonal_array.push(@grid[cell_row_and_col][cell_row_and_col])
+        end
+        for row_index in 0...3
+            diagonal_array.push(@grid[row_index][col_index])
+            col_index -= 1
+        end
+        diagonal_array
     end
 
     def edit_the_grid(row, col, content)
