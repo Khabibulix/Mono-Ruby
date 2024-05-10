@@ -7,4 +7,8 @@ class Cell
     def change_content(new_content)
       @content = new_content
     end
+
+    def get_content
+      self.content
+    end
 end
