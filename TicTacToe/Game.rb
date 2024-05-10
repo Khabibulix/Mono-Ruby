@@ -11,7 +11,7 @@ class Game
     def get_symbol_for_player()
         puts "Choose your symbol!"
         player_symbol = gets.chomp()
-        if player_symbol.length != 1
+        if player_symbol.length < 1
             puts "Too long, we're gonna take the first character, sorry..."
             @player_symbol += player_symbol[0]
         else
@@ -42,11 +42,14 @@ class Game
         when "NaN value"
             puts "Enter a number between 1 and #{@grid.width} please"
             asking_for_input_for_player
+        when "Invalid value"
+            puts "Enter a number between 1 and #{@grid.width} please"
+            asking_for_input_for_player
         when false
             puts "Sorry cell is already used"
             asking_for_input_for_player
         else
-            return "#{row},#{col}"
+            return "#{row.to_i - 1},#{col.to_i - 1}"
         end
     end
 
@@ -54,7 +57,11 @@ class Game
         
         begin
             if !!Float(row) && !!Float(col)
-                return grid.get_cell(row.to_i, col.to_i).content == "."
+                if row.to_i != 0 && col.to_i != 0
+                    return grid.get_cell(row.to_i, col.to_i).content == "."
+                else
+                    return "Invalid value"
+                end
             end
         rescue NoMethodError
             return "No method Error"
@@ -63,11 +70,20 @@ class Game
         end
     end
 
-    # def edit_the_grid_using_player_input()
-    # end
+    def edit_the_grid_using_player_input()
+        string_to_split = asking_for_input_for_player
+        coords_array = string_to_split.split(",")
+        row = coords_array[0].to_i
+        col = coords_array[1].to_i
+        @grid.edit_the_grid(row, col, @player_symbol)        
+    end
 
-    # def launch_the_game()
-    # end
+    def launch_the_game()
+        self.get_symbol_for_player
+        self.check_for_player_symbol_and_computer_symbol_inequality
+        self.edit_the_grid_using_player_input
+        self.grid.display_grid
+    end
 
     # def check_for_end_of_game()
         #Besoin de check_for_victory
@@ -82,4 +98,5 @@ class Game
 end
 
 game = Game.new(Grid.new(3))
-p game.asking_for_input_for_player
+game.launch_the_game
+
