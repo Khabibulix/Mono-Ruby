@@ -13,7 +13,7 @@ class Game
         get_player_turn
     end
 
-    private
+    # private
     def prepare_the_game()
         self.get_symbol_for_player
         self.check_for_player_symbol_and_computer_symbol_inequality
@@ -95,6 +95,12 @@ class Game
         self.edit_the_grid_using_player_input
         self.grid.display_grid
     end
+
+    def get_computer_turn()
+        empty_cells_array = @grid.get_empty_cells
+        cell_to_edit = empty_cells_array.sample
+        cell_to_edit.change_content(@computer_symbol)
+    end
     
 
     # def check_for_end_of_game()
@@ -104,11 +110,12 @@ class Game
     # def check_for_victory()
     # end
 
-    # def get_computer_turn_input()
-    # end
+    
 
 end
 
 game = Game.new(Grid.new(3))
-game.play_the_game
+# game.play_the_game
+game.get_computer_turn
+game.grid.display_grid
 

@@ -34,18 +34,6 @@ class Grid < Cell
         end
     end
 
-    private
-    def create_grid()
-        grid_array = Array.new(@width) {Array.new(@width)}
-        for row in 0...@width
-            for col in 0...@width
-                grid_array[row][col] = Cell.new(".")
-            end
-        end
-        grid_array
-    end    
-    
-
     def get_empty_cells()
         empty_cells_array = []
         for row in 0...@width
@@ -59,6 +47,8 @@ class Grid < Cell
         empty_cells_array
     end
 
+    
+
     def is_grid_full()
         result_array = []
         for row in grid do
@@ -68,5 +58,16 @@ class Grid < Cell
         end
         result_array.none?
     end
+
+    private
+    def create_grid()
+        grid_array = Array.new(@width) {Array.new(@width)}
+        for row in 0...@width
+            for col in 0...@width
+                grid_array[row][col] = Cell.new(".")
+            end
+        end
+        grid_array
+    end        
 
 end
