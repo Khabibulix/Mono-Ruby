@@ -8,6 +8,19 @@ class Game
         @computer_symbol = "X"
     end
 
+    def play_the_game()
+        prepare_the_game
+        get_player_turn
+    end
+
+    private
+    def prepare_the_game()
+        self.get_symbol_for_player
+        self.check_for_player_symbol_and_computer_symbol_inequality
+    end
+
+    
+
     def get_symbol_for_player()
         puts "Choose your symbol!"
         player_symbol = gets.chomp()
@@ -78,12 +91,11 @@ class Game
         @grid.edit_the_grid(row, col, @player_symbol)        
     end
 
-    def launch_the_game()
-        self.get_symbol_for_player
-        self.check_for_player_symbol_and_computer_symbol_inequality
+    def get_player_turn()
         self.edit_the_grid_using_player_input
         self.grid.display_grid
     end
+    
 
     # def check_for_end_of_game()
         #Besoin de check_for_victory
@@ -98,5 +110,5 @@ class Game
 end
 
 game = Game.new(Grid.new(3))
-game.launch_the_game
+game.play_the_game
 
