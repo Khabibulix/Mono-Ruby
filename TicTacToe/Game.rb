@@ -50,12 +50,15 @@ class Game
 
         case is_input_valid_for_player(row, col)
         when "No method Error"
+            p "in no method"
             puts "Enter a number between 1 and #{@grid.width} please"
             asking_for_input_for_player
         when "NaN value"
+            p "in nan"
             puts "Enter a number between 1 and #{@grid.width} please"
             asking_for_input_for_player
         when "Invalid value"
+            p "#{row}, #{col}"
             puts "Enter a number between 1 and #{@grid.width} please"
             asking_for_input_for_player
         when false
@@ -67,12 +70,13 @@ class Game
     end
 
     def is_input_valid_for_player(row, col)
-        
+        p "#{row}, #{col}"
         begin
             if !!Float(row) && !!Float(col)
                 if row.to_i != 0 && col.to_i != 0
                     return grid.get_cell(row.to_i, col.to_i).content == "."
                 else
+                    p "In else"
                     return "Invalid value"
                 end
             end
@@ -107,20 +111,19 @@ class Game
         #Besoin de check_for_victory
     # end
 
-    def check_for_victory(symbol=".")
-        #Ligne
+    def check_for_victory(symbol)
         grid.get_rows.each do |row|
             if row.map{|cell| cell.get_content}.all?(symbol)
                 return true
             end
         end
-        #Colonnes
+
         grid.get_cols.each do |col|
             if col.map{|cell| cell.get_content}.all?(symbol)
                 return true
             end
         end
-        #Diagos
+        
         grid.get_diagonals.each do |diagonal|
             if diagonal.map{|cell| cell.get_content}.all?(symbol)
                 return true
@@ -133,6 +136,4 @@ class Game
 end
 
 game = Game.new(Grid.new(3))
-game.grid.display_grid
-p game.check_for_victory
-
+game.play_the_game
