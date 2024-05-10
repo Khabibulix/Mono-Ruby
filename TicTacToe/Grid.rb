@@ -42,10 +42,10 @@ class Grid < Cell
         diagonal_array = []
         col_index = 2
         for cell_row_and_col in 0...3
-            diagonal_array.push(@grid[cell_row_and_col][cell_row_and_col])
+            diagonal_array.push([@grid[cell_row_and_col][cell_row_and_col]])
         end
         for row_index in 0...3
-            diagonal_array.push(@grid[row_index][col_index])
+            diagonal_array.push([@grid[row_index][col_index]])
             col_index -= 1
         end
         diagonal_array

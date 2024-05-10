@@ -10,10 +10,16 @@ class Game
 
     def play_the_game()
         prepare_the_game
-        get_player_turn
+        for iter in 0...4
+            get_player_turn
+            get_computer_turn
+        end
+        if check_for_victory(@player_symbol)
+            puts "You won"
+        end
     end
 
-    # private
+    private
     def prepare_the_game()
         self.get_symbol_for_player
         self.check_for_player_symbol_and_computer_symbol_inequality
@@ -114,12 +120,13 @@ class Game
             end
         end
 
+        
         grid.get_cols.each do |col|
             if col.map{|cell| cell.get_content}.all?(symbol)
                 return true
             end
         end
-        
+
         grid.get_diagonals.each do |diagonal|
             if diagonal.map{|cell| cell.get_content}.all?(symbol)
                 return true
