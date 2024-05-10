@@ -107,15 +107,32 @@ class Game
         #Besoin de check_for_victory
     # end
 
-    # def check_for_victory()
-    # end
+    def check_for_victory(symbol=".")
+        #Ligne
+        grid.get_rows.each do |row|
+            if row.map{|cell| cell.get_content}.all?(symbol)
+                return true
+            end
+        end
+        #Colonnes
+        grid.get_cols.each do |col|
+            if col.map{|cell| cell.get_content}.all?(symbol)
+                return true
+            end
+        end
+        #Diagos
+        grid.get_diagonals.each do |diagonal|
+            if diagonal.map{|cell| cell.get_content}.all?(symbol)
+                return true
+            end
+        end
+    end
 
     
 
 end
 
 game = Game.new(Grid.new(3))
-# game.play_the_game
-game.get_computer_turn
 game.grid.display_grid
+p game.check_for_victory
 
