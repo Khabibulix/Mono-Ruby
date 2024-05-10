@@ -22,6 +22,20 @@ class Grid < Cell
         self.grid[row][col]
     end
 
+    def get_rows()
+        row_array = []
+        for row in grid
+            row_array.push(row)
+        end
+    end
+
+    def get_cols()
+        col_array = []
+        for col in grid
+            col_array.push(col)
+        end
+    end
+
     def edit_the_grid(row, col, content)
         grid[row][col].change_content(content)
     end    
