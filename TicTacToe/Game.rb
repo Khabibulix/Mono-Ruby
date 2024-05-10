@@ -54,11 +54,9 @@ class Game
             puts "Enter a number between 1 and #{@grid.width} please"
             asking_for_input_for_player
         when "NaN value"
-            p "in nan"
             puts "Enter a number between 1 and #{@grid.width} please"
             asking_for_input_for_player
         when "Invalid value"
-            p "#{row}, #{col}"
             puts "Enter a number between 1 and #{@grid.width} please"
             asking_for_input_for_player
         when false
@@ -70,15 +68,13 @@ class Game
     end
 
     def is_input_valid_for_player(row, col)
-        p "#{row}, #{col}"
         begin
             if !!Float(row) && !!Float(col)
-                if row.to_i != 0 && col.to_i != 0
-                    return grid.get_cell(row.to_i, col.to_i).content == "."
-                else
-                    p "In else"
+                if row.to_i == 0 || col.to_i == 0 || col.to_i < 0 || row.to_i < 0
                     return "Invalid value"
-                end
+                end                
+                return grid.get_cell(row.to_i, col.to_i).content == "."
+                
             end
         rescue NoMethodError
             return "No method Error"

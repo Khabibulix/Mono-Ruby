@@ -19,7 +19,7 @@ class Grid < Cell
     end
 
     def get_cell(row, col)
-        self.grid[row][col]
+        grid[row - 1][col - 1]
     end
 
     def get_rows()
