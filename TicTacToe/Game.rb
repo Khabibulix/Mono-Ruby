@@ -10,16 +10,21 @@ class Game
 
     def play_the_game()
         prepare_the_game
-        for iter in 0...4
+        while !is_end_of_game do
             get_player_turn
-            get_computer_turn
-        end
-        if check_for_victory(@player_symbol)
-            puts "You won"
+            if !is_end_of_game
+                get_computer_turn     
+            end 
+            if check_for_victory(@player_symbol)
+                puts "You won, congratulations"
+            elsif check_for_victory(@computer_symbol)
+                puts "You lose, too bad"
+                break
+            end
         end
     end
 
-    private
+    #private
     def prepare_the_game()
         self.get_symbol_for_player
         self.check_for_player_symbol_and_computer_symbol_inequality
@@ -56,7 +61,6 @@ class Game
 
         case is_input_valid_for_player(row, col)
         when "No method Error"
-            p "in no method"
             puts "Enter a number between 1 and #{@grid.width} please"
             asking_for_input_for_player
         when "NaN value"
@@ -109,29 +113,28 @@ class Game
     end
     
 
-    # def check_for_end_of_game()
-        #Besoin de check_for_victory
-    # end
+    def is_end_of_game()
+        @grid.is_grid_full
+    end
 
     def check_for_victory(symbol)
-        grid.get_rows.each do |row|
-            if row.map{|cell| cell.get_content}.all?(symbol)
-                return true
-            end
-        end
+        # grid.get_rows.each do |row|            
+        #     if row.map{|cell| cell.get_content}.all?(symbol)
+        #         return true
+        #     end
+        # end
 
         
-        grid.get_cols.each do |col|
-            if col.map{|cell| cell.get_content}.all?(symbol)
-                return true
-            end
+        grid.get_cols.each do |col|            
+            return col.map{|cell| cell.get_content}.all?(symbol)
         end
 
-        grid.get_diagonals.each do |diagonal|
-            if diagonal.map{|cell| cell.get_content}.all?(symbol)
-                return true
-            end
-        end
+        # grid.get_diagonals.each do |diagonal|            
+        #     if diagonal.map{|cell| cell.get_content}.all?(symbol)
+        #         return true
+        #     end
+        # end
+        
     end
 
     
@@ -140,3 +143,10 @@ end
 
 game = Game.new(Grid.new(3))
 game.play_the_game
+# game.grid.edit_the_grid(0,0,"X")
+# game.grid.display_grid
+# game.grid.get_diagonals.each do |diagonal|            
+#     if diagonal.map{|cell| cell.get_content}.all?("X")
+#         p "Yup"
+#     end
+# end

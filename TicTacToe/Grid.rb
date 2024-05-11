@@ -32,23 +32,27 @@ class Grid < Cell
 
     def get_cols()
         col_array = []
-        for col in grid
-            col_array.push(col)
+        col_index = 0
+        for iter in grid
+            col_array.push(grid.map{|col| col[col_index]})
+            col_index += 1
         end
         col_array
     end
 
     def get_diagonals()
         diagonal_array = []
+        first_diagonal = []
+        second_diagonal = []
         col_index = 2
-        for cell_row_and_col in 0...3
-            diagonal_array.push([@grid[cell_row_and_col][cell_row_and_col]])
+        for index in 0...3
+            first_diagonal.push(@grid[index][index])
         end
         for row_index in 0...3
-            diagonal_array.push([@grid[row_index][col_index]])
+            second_diagonal.push(@grid[row_index][col_index])
             col_index -= 1
         end
-        diagonal_array
+        diagonal_array.push(first_diagonal, second_diagonal)
     end
 
     def edit_the_grid(row, col, content)
