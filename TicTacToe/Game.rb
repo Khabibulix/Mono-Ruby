@@ -17,6 +17,7 @@ class Game
             end 
             if check_for_victory(@player_symbol)
                 puts "You won, congratulations"
+                break
             elsif check_for_victory(@computer_symbol)
                 puts "You lose, too bad"
                 break
@@ -35,7 +36,11 @@ class Game
     def get_symbol_for_player()
         puts "Choose your symbol!"
         player_symbol = gets.chomp()
-        if player_symbol.length < 1
+
+        if player_symbol.length == 0
+            @player_symbol = "O"
+
+        elsif player_symbol.length < 1
             puts "Too long, we're gonna take the first character, sorry..."
             @player_symbol += player_symbol[0]
         else
@@ -118,22 +123,26 @@ class Game
     end
 
     def check_for_victory(symbol)
-        # grid.get_rows.each do |row|            
-        #     if row.map{|cell| cell.get_content}.all?(symbol)
-        #         return true
-        #     end
-        # end
+        grid.get_rows.each do |row|            
+            if row.map{|cell| cell.get_content}.all?(symbol)
+                return true
+            end
+        end
 
         
         grid.get_cols.each do |col|            
-            return col.map{|cell| cell.get_content}.all?(symbol)
+            if col.map{|cell| cell.get_content}.all?(symbol)
+              return true
+            end
         end
 
-        # grid.get_diagonals.each do |diagonal|            
-        #     if diagonal.map{|cell| cell.get_content}.all?(symbol)
-        #         return true
-        #     end
-        # end
+        grid.get_diagonals.each do |diagonal|  
+            if diagonal.map{|cell| cell.get_content}.all?(symbol)
+                return true
+            else
+                return false
+            end
+        end
         
     end
 
@@ -143,10 +152,3 @@ end
 
 game = Game.new(Grid.new(3))
 game.play_the_game
-# game.grid.edit_the_grid(0,0,"X")
-# game.grid.display_grid
-# game.grid.get_diagonals.each do |diagonal|            
-#     if diagonal.map{|cell| cell.get_content}.all?("X")
-#         p "Yup"
-#     end
-# end
