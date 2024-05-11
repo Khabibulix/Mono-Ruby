@@ -1,0 +1,14 @@
+Orga code:
+    Classe Code
+    Classe Game
+
+Etape 1:
+
+    Générer une combinaison de 4 couleurs aléatoirement.
+
+    Demander un prompt de 4 couleurs à la suite.
+        Si la couleur apparaît mais pas au bon endroit = blanc
+        Si la couleur apparaît au bon endroit = rouge
+
+Etape 2:
+    Demander si on veut deviner ou faire deviner.
