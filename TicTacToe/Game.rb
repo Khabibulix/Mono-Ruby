@@ -25,7 +25,7 @@ class Game
         end
     end
 
-    #private
+    private
     def prepare_the_game()
         self.get_symbol_for_player
         self.check_for_player_symbol_and_computer_symbol_inequality
@@ -40,7 +40,7 @@ class Game
         if player_symbol.length == 0
             @player_symbol = "O"
 
-        elsif player_symbol.length < 1
+        elsif player_symbol.length > 1
             puts "Too long, we're gonna take the first character, sorry..."
             @player_symbol += player_symbol[0]
         else
@@ -103,7 +103,7 @@ class Game
         coords_array = string_to_split.split(",")
         row = coords_array[0].to_i
         col = coords_array[1].to_i
-        @grid.edit_the_grid(row, col, @player_symbol)        
+        @grid.edit_grid(row, col, @player_symbol)        
     end
 
     def get_player_turn()
@@ -119,7 +119,7 @@ class Game
     
 
     def is_end_of_game()
-        @grid.is_grid_full
+        @grid.grid_full?
     end
 
     def check_for_victory(symbol)

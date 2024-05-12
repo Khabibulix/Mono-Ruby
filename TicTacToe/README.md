@@ -1,4 +1,6 @@
 First "big" project in Ruby using OOP principles.
+A simple CLI game of tic-tac-toe where the user plays a game against the computer.
+
 
 Credits: The Odin Project, there: 
 https://www.theodinproject.com/lessons/ruby-tic-tac-toe
