@@ -31,6 +31,10 @@ class Game
         word_hidden
     end
 
+    def edit_hidden_word(word=@hidden_word, index, new_value)
+        word[index] = new_value
+    end
+
     def get_input_from_user
         puts "Choose a letter:\n" #Attention à bien checker qu'on a une lettre!
         gets.chomp
@@ -40,17 +44,17 @@ class Game
         word.include?(letter)
     end
 
-    def get_all_index_for_letter(word=@word,letter)
+    def get_indexes_for_letter(word=@word,letter)
         word.chars.each_with_index.select{|c, i| c == letter}.map(&:last)
     end
 
-    def replacing_letter_by_input(word=@word, letter)
+    def replacing_letter(word=@word,hw=@hidden_word, letter)
         if is_input_in_word?(word,letter)
-            indexes_of_letter = get_all_index_for_letter(word,letter)
+            indexes_of_letter = get_indexes_for_letter(word,letter)
             indexes_of_letter.each do|index| 
-                @hidden_word[index] = letter
+                edit_hidden_word(hw, index, letter)
             end
-            @hidden_word
+            hw
         end
     end
 
