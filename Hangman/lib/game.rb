@@ -1,7 +1,8 @@
 class Game
-    attr_reader :word, :incorrect_guess, :choosed_letters        
+    attr_reader :word, :hidden_word, :incorrect_guess, :choosed_letters        
     def initialize
         @word = choose_word
+        @hidden_word = display_hidden_word
         @incorrect_guesses = 5
         @choosed_letters = []
     end
@@ -21,18 +22,46 @@ class Game
     end
 
     def choose_word
-        wordlist = stock_words_of_correct_size
-        wordlist.sample
+        stock_words_of_correct_size.sample
     end
 
-    def display_hidden_word
+    def display_hidden_word(word=@word)
         word_hidden = ""
-        (0...@word.length).each {word_hidden += "_"}
+        (0...word.length).each {word_hidden += "_"}
         word_hidden
     end
+
+    def get_input_from_user
+        puts "Choose a letter:\n" #Attention à bien checker qu'on a une lettre!
+        gets.chomp
+    end
+
+    def is_input_in_word?(word=@word, letter)
+        word.include?(letter)
+    end
+
+    def get_all_index_for_letter(word=@word,letter)
+        word.chars.each_with_index.select{|c, i| c == letter}.map(&:last)
+    end
+
+    def replacing_letter_by_input(word=@word, letter)
+        if is_input_in_word?(word,letter)
+            indexes_of_letter = get_all_index_for_letter(word,letter)
+            indexes_of_letter.each do|index| 
+                @hidden_word[index] = letter
+            end
+            @hidden_word
+        end
+    end
+
 end
 
 
 
-game = Game.new()
-p game.display_hidden_word
+# game = Game.new()
+# p game.choose_word
+# p game.is_input_in_word?("e")
+# p game.get_all_index_for_letter("e")
+# word = game.choose_word
+# p word
+# p word.include?("e")

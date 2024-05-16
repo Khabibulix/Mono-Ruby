@@ -38,4 +38,14 @@ class Test < Minitest::Test
         assert_equal([5,8], @game.get_all_index_for_letter("esperanza", "a"))
     end
 
+    def test_get_all_index_for_random_word
+        if @game.is_input_in_word?("e")
+            assert(@game.get_all_index_for_letter("e").length > 0)
+        end
+    end
+
+    def test_replacing_letter_by_input
+        assert_equal("e__e_____", @game.replacing_letter_by_input("esperanza", "e"))
+    end
+
 end
