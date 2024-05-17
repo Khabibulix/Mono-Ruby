@@ -7,6 +7,24 @@ class Game
         @choosed_letters = []
     end
 
+    def init_game
+        stock_words_of_correct_size
+        choose_word
+        p "Here is the current word to guess\n"
+        p display_hidden_word
+    end
+
+    def play_round
+        input = get_input_from_user
+        replacing_letter(@word, @hidden_word, input)
+        
+    end
+
+    def game_finished?(hw=@hidden_word)
+        hw.chars.none?("_")
+    end
+
+    private
     def stock_words_of_correct_size
         wordlist = File.new("#{Dir.pwd}/data/wordlist.txt")
 
@@ -59,6 +77,7 @@ class Game
             indexes_of_letter = get_indexes_for_letter(word,letter)
             indexes_of_letter.each do|index| 
                 edit_hidden_word(hw, index, letter)
+                p "Here is the word, now: #{hw}"
                 @choosed_letters.push(letter)
             end
             hw
@@ -66,15 +85,6 @@ class Game
             @remaining_guesses -= 1
             @choosed_letters.push(letter)
         end
-    end
-
-    def game_finished?(hw=@hidden_word)
-        hw.chars.none?("_")
-    end
+    end   
 
 end
-
-
-
-game = Game.new()
-game.get_input_from_user
