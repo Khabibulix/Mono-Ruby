@@ -1,9 +1,12 @@
+require 'json'
+
 class Game
-    attr_reader :word, :hidden_word, :remaining_guesses, :choosed_letters        
+    attr_reader :word, :current_word_for_save, :hidden_word, :remaining_guesses, :choosed_letters        
     def initialize
         @word = choose_word
         @hidden_word = display_hidden_word
-        @remaining_guesses = 5
+        @current_word_for_save = ""
+        @remaining_guesses = 10
         @choosed_letters = []
     end
 
@@ -15,9 +18,12 @@ class Game
     end
 
     def play_round
-        input = get_input_from_user        
+        input = get_input_from_user            
         replacing_letter(@word, @hidden_word, input)
-        p "You already choosed: #{@choosed_letters.uniq!}"
+        p "You already choosed: #{@choosed_letters.uniq!}"        
+        p "Would you like to save the current progress? y/n"
+        save_input = gets.chomp
+        get_save_input(save_input)
         
     end
 
@@ -85,6 +91,7 @@ class Game
             indexes_of_letter.each do|index| 
                 edit_hidden_word(hw, index, letter)
             p "Here is the word, now: #{hw}"
+            @current_word_for_save = hw
             @choosed_letters.push(letter)
             end
             hw
@@ -93,5 +100,25 @@ class Game
             @choosed_letters.push(letter)
         end
     end   
+
+    def get_save_input(input)
+        case input.downcase
+        when "y"
+            saving_game
+        else
+            return
+        end
+    end
+
+    def saving_game
+        data = [@current_word_for_save, @remaining_guesses, @choosed_letters]
+        File.open("#{Dir.pwd}/data/save.json", "w") do |file|
+            file.write(data.to_json)
+        end
+    end
+
+    def loading_game
+
+    end
 
 end
