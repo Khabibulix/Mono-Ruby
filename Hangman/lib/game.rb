@@ -15,13 +15,20 @@ class Game
     end
 
     def play_round
-        input = get_input_from_user
+        input = get_input_from_user        
         replacing_letter(@word, @hidden_word, input)
+        p "You already choosed: #{@choosed_letters.uniq!}"
         
     end
 
     def game_finished?(hw=@hidden_word)
-        hw.chars.none?("_")
+        if hw.chars.none?("_")
+            return true
+        elsif @remaining_guesses == 0
+            p "Sorry, no more guesses, you lose!"
+            return true
+        end
+        return false
     end
 
     private
@@ -77,8 +84,8 @@ class Game
             indexes_of_letter = get_indexes_for_letter(word,letter)
             indexes_of_letter.each do|index| 
                 edit_hidden_word(hw, index, letter)
-                p "Here is the word, now: #{hw}"
-                @choosed_letters.push(letter)
+            p "Here is the word, now: #{hw}"
+            @choosed_letters.push(letter)
             end
             hw
         else
