@@ -19,15 +19,15 @@ class Test < Minitest::Test
     end
 
     def test_true_is_input_in_word_for_e
-        assert(@game.is_input_in_word?("esperanza", "e"))
+        assert(@game.input_in_word?("esperanza", "e"))
     end
 
     def test_true_is_input_in_word_for_a
-        assert(@game.is_input_in_word?("esperanza", "a"))
+        assert(@game.input_in_word?("esperanza", "a"))
     end
 
     def test_false_is_input_in_word?
-        assert(!@game.is_input_in_word?("asparanza", "e"))
+        assert(!@game.input_in_word?("asparanza", "e"))
     end
 
     def test_get_all_index_for_letter_e
@@ -39,7 +39,7 @@ class Test < Minitest::Test
     end
 
     def test_get_all_index_for_random_word
-        if @game.is_input_in_word?("e")
+        if @game.input_in_word?("e")
             assert(@game.get_indexes_for_letter("e").length > 0)
         end
     end
@@ -59,6 +59,16 @@ class Test < Minitest::Test
         hidden_word = @game.display_hidden_word("esperanza")
         @game.replacing_letter("esperanza",hidden_word, "y")
         assert(@game.remaining_guesses != 5)
+    end
+
+    def test_game_finished?
+        hidden_word = "esperanza"
+        assert(@game.game_finished?(hidden_word))
+    end
+
+    def test_shitty_game_finished?
+        hidden_word = "esper_nza"
+        assert(!@game.game_finished?(hidden_word))
     end
 
 end

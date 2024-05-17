@@ -40,7 +40,7 @@ class Game
         gets.chomp
     end
 
-    def is_input_in_word?(word=@word, letter)
+    def input_in_word?(word=@word, letter)
         word.include?(letter)
     end
 
@@ -49,7 +49,7 @@ class Game
     end
 
     def replacing_letter(word=@word,hw=@hidden_word, letter)
-        if is_input_in_word?(word,letter)
+        if input_in_word?(word,letter)
             indexes_of_letter = get_indexes_for_letter(word,letter)
             indexes_of_letter.each do|index| 
                 edit_hidden_word(hw, index, letter)
@@ -60,6 +60,10 @@ class Game
             @remaining_guesses -= 1
             @choosed_letters.push(letter)
         end
+    end
+
+    def game_finished?(hw=@hidden_word)
+        hw.chars.none?("_")
     end
 
 end
