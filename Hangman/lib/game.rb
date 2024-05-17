@@ -20,10 +20,10 @@ class Game
     def play_round
         input = get_input_from_user            
         replacing_letter(@word, @hidden_word, input)
-        p "You already choosed: #{@choosed_letters.uniq!}"        
-        p "Would you like to save the current progress? y/n"
-        save_input = gets.chomp
-        get_save_input(save_input)
+        p "You already choosed: #{@choosed_letters.uniq}"        
+        # p "Would you like to save the current progress? y/n"
+        # save_input = gets.chomp
+        # get_save_input(save_input)
         
     end
 
@@ -37,7 +37,6 @@ class Game
         return false
     end
 
-    private
     def stock_words_of_correct_size
         wordlist = File.new("#{Dir.pwd}/data/wordlist.txt")
 
@@ -90,10 +89,10 @@ class Game
             indexes_of_letter = get_indexes_for_letter(word,letter)
             indexes_of_letter.each do|index| 
                 edit_hidden_word(hw, index, letter)
-            p "Here is the word, now: #{hw}"
+            end
+            p "The word is #{hw}"
             @current_word_for_save = hw
             @choosed_letters.push(letter)
-            end
             hw
         else
             @remaining_guesses -= 1
@@ -101,21 +100,21 @@ class Game
         end
     end   
 
-    def get_save_input(input)
-        case input.downcase
-        when "y"
-            saving_game
-        else
-            return
-        end
-    end
+    # def get_save_input(input)
+    #     case input.downcase
+    #     when "y"
+    #         saving_game
+    #     else
+    #         return
+    #     end
+    # end
 
-    def saving_game
-        data = [@current_word_for_save, @remaining_guesses, @choosed_letters]
-        File.open("#{Dir.pwd}/data/save.json", "w") do |file|
-            file.write(data.to_json)
-        end
-    end
+    # def saving_game
+    #     data = [@current_word_for_save, @remaining_guesses, @choosed_letters]
+    #     File.open("#{Dir.pwd}/data/save.json", "w") do |file|
+    #         file.write(data.to_json)
+    #     end
+    # end
 
     def loading_game
 
