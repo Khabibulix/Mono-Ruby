@@ -36,8 +36,14 @@ class Game
     end
 
     def get_input_from_user
-        puts "Choose a letter:\n" #Attention à bien checker qu'on a une lettre!
-        gets.chomp
+        puts "Choose a letter:\n"
+        input = gets.downcase.chomp
+        if input.match(/[A-Za-z]/)
+            input
+        else
+            puts "Please choose a letter, only:\n"
+            get_input_from_user
+        end
     end
 
     def input_in_word?(word=@word, letter)
@@ -70,10 +76,5 @@ end
 
 
 
-# game = Game.new()
-# p game.choose_word
-# p game.is_input_in_word?("e")
-# p game.get_all_index_for_letter("e")
-# word = game.choose_word
-# p word
-# p word.include?("e")
+game = Game.new()
+game.get_input_from_user
