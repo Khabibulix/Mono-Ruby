@@ -1,9 +1,9 @@
 class Game
-    attr_reader :word, :hidden_word, :incorrect_guess, :choosed_letters        
+    attr_reader :word, :hidden_word, :remaining_guesses, :choosed_letters        
     def initialize
         @word = choose_word
         @hidden_word = display_hidden_word
-        @incorrect_guesses = 5
+        @remaining_guesses = 5
         @choosed_letters = []
     end
 
@@ -53,8 +53,12 @@ class Game
             indexes_of_letter = get_indexes_for_letter(word,letter)
             indexes_of_letter.each do|index| 
                 edit_hidden_word(hw, index, letter)
+                @choosed_letters.push(letter)
             end
             hw
+        else
+            @remaining_guesses -= 1
+            @choosed_letters.push(letter)
         end
     end
 

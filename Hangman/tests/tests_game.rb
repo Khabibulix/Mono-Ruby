@@ -44,14 +44,21 @@ class Test < Minitest::Test
         end
     end
 
-    def test_replacing_letter_by_input
+    def test_replacing_letter
         hidden_word = @game.display_hidden_word("esperanza")
         assert_equal("e__e_____", @game.replacing_letter("esperanza",hidden_word,"e"))
     end
 
-    # def test_incorrect_replacing_letter_by_input_changes_guesses
-    #     @game.replacing_letter_by_input("esperanza", "y")
-    #     assert(@game.incorrect_guess > 5)
-    # end
+    def test_replacing_letter_add_to_guesses
+        hidden_word = @game.display_hidden_word("esperanza")
+        @game.replacing_letter("esperanza",hidden_word,"e")
+        assert(@game.choosed_letters.length > 0)
+    end
+
+    def test_incorrect_replacing_letter_increments_incorrect_guesses
+        hidden_word = @game.display_hidden_word("esperanza")
+        @game.replacing_letter("esperanza",hidden_word, "y")
+        assert(@game.remaining_guesses != 5)
+    end
 
 end
