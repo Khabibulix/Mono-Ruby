@@ -12,19 +12,33 @@ class Game
     end
 
     def init_game
-        stock_words_of_correct_size
-        choose_word
+
+        p "Do you want to load a game? y/n"
+        load_input = gets.chomp
+        check_input(load_input, loading_game)
+        datas = loading_game
+        @hidden_word = datas[0]
+        @word = datas[1]
+        @remaining_guesses = datas[2]
+        datas[3].each {|letter| @choosed_letters.push(letter)}
+        
+        if load_input != "y"
+            stock_words_of_correct_size
+            choose_word
+        end
+
         p "Here is the current word to guess\n"
-        p display_hidden_word
+        p @hidden_word
     end
 
     def play_round
         input = get_input_from_user            
         replacing_letter(@word, @hidden_word, input)
+
         p "You already choosed: #{@choosed_letters.uniq.join(", ")}"        
         p "Would you like to save the current progress? y/n"
         save_input = gets.chomp
-        get_save_input(save_input)
+        check_input(save_input, saving_game)
         
     end
 
@@ -49,17 +63,7 @@ class Game
     def edit_hidden_word(word=@hidden_word, index, new_value)
         word[index] = new_value
     end
-
-    def get_input_from_user
-        puts "Choose a letter:\n"
-        input = gets.downcase.chomp
-        if input.match(/[A-Za-z]/)
-            input
-        else
-            puts "Please choose a letter, only:\n"
-            get_input_from_user
-        end
-    end
+    
     
 
     def replacing_letter(word=@word,hw=@hidden_word, letter)
@@ -79,19 +83,12 @@ class Game
             @choosed_letters.push(letter)
         end
     end   
-
-    def get_save_input(input)
-        case input.downcase
-        when "y"
-            saving_game
-        else
-            return
-        end
-    end
+    
 
     def saving_game
         data = {
             current_word: @current_word_for_save,
+            word: @word,
             guesses: @remaining_guesses,
             letters: @choosed_letters
         }
@@ -102,10 +99,11 @@ class Game
     end
 
     def loading_game
-
+        file = File.open("#{Dir.pwd}/data/save.json")
+        data = JSON.load file
+        data.values
     end
 
 end
 
-game = Game.new()
 

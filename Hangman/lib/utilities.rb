@@ -24,3 +24,23 @@ end
 def get_indexes_for_letter(word,letter)
     word.chars.each_with_index.select{|c, i| c == letter}.map(&:last)
 end
+
+def get_input_from_user
+    puts "Choose a letter:\n"
+    input = gets.downcase.chomp
+    if input.match(/[A-Za-z]/)
+        input
+    else
+        puts "Please choose a letter, only:\n"
+        get_input_from_user
+    end
+end
+
+def check_input(input, method)
+    case input.downcase
+    when "y"
+        method
+    else
+        return
+    end
+end
