@@ -95,9 +95,10 @@ class Game
             guesses: @remaining_guesses,
             letters: @choosed_letters
         }
-        file = File.read("#{Dir.pwd}/data/save.json")
-        json_file = file.write(JSON.parse(file))
-        file.close
+
+        File.open("#{Dir.pwd}/data/save.json", "w") do |file|
+            file.write(data.to_json)
+        end
     end
 
     def loading_game
