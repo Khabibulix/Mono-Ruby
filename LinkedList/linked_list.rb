@@ -53,6 +53,11 @@ class LinkedList
         end
     end
 
+    def pop
+        before_last_node = at(size - 1)
+        before_last_node.next_node = nil
+    end
+
 end
 
 
@@ -67,6 +72,8 @@ p ll.size #Should be 3
 ll.append("D")
 ll.append("E")
 p ll.size #Should be 5
-p ll.at(3).to_s
+p ll.at(3).to_s #Should be "C"
+ll.pop
+p ll.size #Should be 4
 
 
