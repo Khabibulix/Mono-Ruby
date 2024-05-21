@@ -4,4 +4,8 @@ class Node
         @value = nil
         @next_node = nil
     end
+
+    def to_s
+        "Node value is: #{@value}"
+    end
 end
