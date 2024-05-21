@@ -58,6 +58,17 @@ class LinkedList
         before_last_node.next_node = nil
     end
 
+    def contains?(value)
+        current_node = @head
+        while current_node.next_node            
+            if current_node.value == value
+                return true
+            end
+            current_node = current_node.next_node
+        end
+        return false
+    end
+
 end
 
 
@@ -75,5 +86,7 @@ p ll.size #Should be 5
 p ll.at(3).to_s #Should be "C"
 ll.pop
 p ll.size #Should be 4
+p ll.contains?("C") #Should be true
+p ll.contains?("E") #Should be false
 
 
