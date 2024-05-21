@@ -12,14 +12,9 @@ class LinkedList
     end
 
     def prepend(value)
-        current_node = Node.new(value)        
-        if is_empty?
-            @head = current_node
-            current_node.next_node = nil
-        else
-            current_node.next_node = @head
-            @head = current_node
-        end
+        current_node = Node.new(value)   
+        current_node.next_node = @head
+        @head = current_node
     end
 
     def tail
@@ -30,10 +25,6 @@ class LinkedList
         current_node
     end
 
-
-    def is_empty?
-        @head == nil
-    end
 end
 
 
