@@ -69,6 +69,17 @@ class LinkedList
         return false
     end
 
+    def find(value)
+        number = 1
+        size.times do
+            if at(number).value == value
+                return number 
+            else
+                number += 1
+            end
+        end
+    end
+
 end
 
 
@@ -88,5 +99,7 @@ ll.pop
 p ll.size #Should be 4
 p ll.contains?("C") #Should be true
 p ll.contains?("E") #Should be false
+p ll.find("C")
+
 
 
