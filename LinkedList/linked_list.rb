@@ -80,26 +80,36 @@ class LinkedList
         end
     end
 
+    def to_s
+        current_node = @head
+        while current_node.next_node
+            print "(#{current_node.value}) -> "
+            current_node = current_node.next_node
+        end
+        print "(#{current_node.value})"
+    end
+
 end
 
 
 node = Node.new("B")
 ll = LinkedList.new(node)
 ll.prepend("A")
-p ll.head.to_s #Should be "A"
-p ll.tail.to_s #Should be "B"
+ll.head.to_s #Should be "A"
+ll.tail.to_s #Should be "B"
 ll.append("C")
-p ll.tail.to_s #Should be "C"
-p ll.size #Should be 3
+ll.tail.to_s #Should be "C"
+ll.size #Should be 3
 ll.append("D")
 ll.append("E")
-p ll.size #Should be 5
-p ll.at(3).to_s #Should be "C"
+ll.size #Should be 5
+ll.at(3).to_s #Should be "C"
 ll.pop
-p ll.size #Should be 4
-p ll.contains?("C") #Should be true
-p ll.contains?("E") #Should be false
-p ll.find("C")
+ll.size #Should be 4
+ll.contains?("C") #Should be true
+ll.contains?("E") #Should be false
+ll.find("C")
+ll.to_s
 
 
 
