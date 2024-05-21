@@ -20,8 +20,14 @@ class LinkedList
             current_node.next_node = @head
             @head = current_node
         end
+    end
 
-
+    def tail
+        current_node = @head
+        while current_node.next_node
+            current_node = current_node.next_node
+        end
+        current_node
     end
 
 
@@ -31,9 +37,10 @@ class LinkedList
 end
 
 
-node = Node.new("Value")
+node = Node.new("C")
 ll = LinkedList.new(node)
 ll.prepend("B")
 p ll.head.to_s #Should be "B"
+p ll.tail.to_s #Should be "C"
 
 
