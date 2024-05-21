@@ -41,6 +41,18 @@ class LinkedList
         size
     end
 
+    def at(index)
+        current_node = @head
+        current_index = 1
+        while current_node.next_node
+            if index == current_index
+                return current_node
+            end
+            current_node = current_node.next_node
+            current_index += 1
+        end
+    end
+
 end
 
 
@@ -55,5 +67,6 @@ p ll.size #Should be 3
 ll.append("D")
 ll.append("E")
 p ll.size #Should be 5
+p ll.at(3).to_s
 
 
