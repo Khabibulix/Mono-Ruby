@@ -31,6 +31,16 @@ class LinkedList
         current_node.next_node = nil
     end
 
+    def size
+        current_node = @head
+        size = 1
+        while current_node.next_node
+            current_node = current_node.next_node
+            size += 1
+        end
+        size
+    end
+
 end
 
 
@@ -41,5 +51,9 @@ p ll.head.to_s #Should be "A"
 p ll.tail.to_s #Should be "B"
 ll.append("C")
 p ll.tail.to_s #Should be "C"
+p ll.size #Should be 3
+ll.append("D")
+ll.append("E")
+p ll.size #Should be 5
 
 
