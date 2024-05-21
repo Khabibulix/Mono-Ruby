@@ -25,13 +25,21 @@ class LinkedList
         current_node
     end
 
+    def append(value)
+        current_node = Node.new(value)
+        tail.next_node = current_node
+        current_node.next_node = nil
+    end
+
 end
 
 
-node = Node.new("C")
+node = Node.new("B")
 ll = LinkedList.new(node)
-ll.prepend("B")
-p ll.head.to_s #Should be "B"
+ll.prepend("A")
+p ll.head.to_s #Should be "A"
+p ll.tail.to_s #Should be "B"
+ll.append("C")
 p ll.tail.to_s #Should be "C"
 
 
