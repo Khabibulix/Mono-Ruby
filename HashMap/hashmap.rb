@@ -37,6 +37,12 @@ class HashMap
       end
 
       def set(key, value)
-        
+        hash_code = hash(key)
+        index = hash_code % @buckets.size
+        current_bucket = @buckets[index]
+        p current_bucket
       end
 end
+
+h = HashMap.new()
+h.set("Carlos", "Carl")
