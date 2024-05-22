@@ -44,7 +44,6 @@ class HashMap
         current_node = current_bucket.head
 
         if current_node.nil?
-          #Empty bucket
           current_bucket.head = Node.new(key, value)
         else
           until current_node.nil?
@@ -55,14 +54,29 @@ class HashMap
             current_node = current_node.next
           end
           new_node = Node.new(key, value)
-          #Swapping nodes
           new_node.next = current_bucket.head
           current_bucket.head = new_node
         end
+      end
+
+      def get(key)
+        hash = hash(key)
+        index = hash % @buckets.size
+        current_bucket = @buckets[index]
+        
+        current_node = current_bucket.head
+
+        until current_node.nil?
+          if current_node.key == key
+            return current_node.value
+          end
+          current_node = current_node.next
+        end
+
+        return nil
       end
 end
 
 h = HashMap.new()
 h.set("Carlos", 25)
-h.set("Calros", 24)
-p h
+p h.get("Carlos") #Expected 25
