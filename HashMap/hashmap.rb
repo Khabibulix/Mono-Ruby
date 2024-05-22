@@ -40,9 +40,29 @@ class HashMap
         hash_code = hash(key)
         index = hash_code % @buckets.size
         current_bucket = @buckets[index]
-        p current_bucket
+
+        current_node = current_bucket.head
+
+        if current_node.nil?
+          #Empty bucket
+          current_bucket.head = Node.new(key, value)
+        else
+          until current_node.nil?
+            if current_node.key == key
+              current_node.value = value
+              return
+            end
+            current_node = current_node.next
+          end
+          new_node = Node.new(key, value)
+          #Swapping nodes
+          new_node.next = current_bucket.head
+          current_bucket.head = new_node
+        end
       end
 end
 
 h = HashMap.new()
-h.set("Carlos", "Carl")
+h.set("Carlos", 25)
+h.set("Calros", 24)
+p h
