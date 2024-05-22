@@ -75,8 +75,22 @@ class HashMap
 
         return nil
       end
+
+      def has?(key)
+        hash = hash(key)
+        index = hash % @buckets.size
+        current_bucket = @buckets[index]
+        
+        current_node = current_bucket.head
+
+        until current_node.nil?
+          return current_node.key == key ? true : false
+          current_node = current_node.next
+        end
+      end
 end
 
 h = HashMap.new()
 h.set("Carlos", 25)
 p h.get("Carlos") #Expected 25
+p h.has?("Carlos") #Expected true
