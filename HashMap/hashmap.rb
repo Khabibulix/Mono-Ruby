@@ -107,13 +107,25 @@ class HashMap
         end
         false
       end
+
+      def length
+        count = 0
+        @buckets.each do |bucket|
+          current_node = bucket.head
+          if current_node != nil
+            count += 1
+          end
+        end
+        count
+      end
 end
 
 h = HashMap.new()
 h.set("Carlos", 25)
+h.set("Clara", 12)
 p h.get("Carlos") #Expected 25
 p h.has?("Carlos") #Expected true
 p h.remove("Claros") #Expected nil
 p h.remove("Carlos") #Expected true
 p h.get("Carlos") #Expected nil
-p h
+p h.length #Expected 1
