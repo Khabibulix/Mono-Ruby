@@ -24,6 +24,7 @@ class HashMap
     attr_accessor :buckets
     
     def initialize(size = 16)
+      @size = size
       @buckets = Array.new(size) {LinkedList.new}
     end
 
@@ -118,6 +119,11 @@ class HashMap
         end
         count
       end
+
+      def clear
+        @buckets = Array.new(@size) {LinkedList.new}
+      end
+      
 end
 
 h = HashMap.new()
