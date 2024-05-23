@@ -1,0 +1,6 @@
+Deux classes:
+
+Node qui a une donnée, un voisin droite et un
+voisin gauche.
+
+Tree qui a un root.
