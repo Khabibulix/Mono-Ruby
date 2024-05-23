@@ -123,7 +123,49 @@ class HashMap
       def clear
         @buckets = Array.new(@size) {LinkedList.new}
       end
+
+      def keys
+        keys = []
+        
+        @size.times do |index|
+          next if @buckets[index].head.nil?
+          current_node = @buckets[index].head
+          until current_node.nil?
+            keys.push(current_node.key)
+            current_node = current_node.next 
+          end
+        end
+        keys
+      end
       
+      def values
+        values = []
+        
+        @size.times do |index|
+          next if @buckets[index].head.nil?
+          current_node = @buckets[index].head
+          until current_node.nil?
+            values.push(current_node.value)
+            current_node = current_node.next 
+          end
+        end
+        values
+      end
+
+      def entries
+        entries = []
+        
+        @size.times do |index|
+          next if @buckets[index].head.nil?
+          current_node = @buckets[index].head
+          until current_node.nil?
+            entries.push([current_node.key, current_node.value])
+            current_node = current_node.next 
+          end
+        end
+        entries
+      end
+
 end
 
 h = HashMap.new()
@@ -135,3 +177,6 @@ p h.remove("Claros") #Expected nil
 p h.remove("Carlos") #Expected true
 p h.get("Carlos") #Expected nil
 p h.length #Expected 1
+p h.keys #Expected ["Clara"]
+p h.values #Expected [12]
+p h.entries #Expected [["Clara", 12]]
