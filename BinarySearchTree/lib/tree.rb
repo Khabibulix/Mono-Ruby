@@ -66,6 +66,17 @@ class Tree
         root
     end
 
+    def find(root=@root, value)
+        return nil if root.nil?
+        return root if value == root.data
+            
+        if value < root.data
+            find(root.left, value)
+        else
+            find(root.right, value)
+        end
+    end
+
     
     
 
