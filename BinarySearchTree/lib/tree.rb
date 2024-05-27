@@ -40,5 +40,32 @@ class Tree
         return root
     end
 
+    #Necessary for delete_node
+    def get_min_value(root)
+        min_value = root.data
+        while root.left
+            min_value = root.left.data
+            root = root.left
+        end
+        min_value
+    end
+
+    def delete_node(root=@root, value)
+        return root if root.nil?
+
+        if value < root.data
+            root.left = delete_node(root.left, value)
+        elsif value > root.data
+            root.right = delete_node(root.right, value)
+        else
+            return root.right if root.left.nil?
+            return root.left if root.right.nil?
+            root.data = 
+        end
+    end
+
+    
+    
+
     
 end
