@@ -26,7 +26,7 @@ class Tree
     end
 
     def insert_node(root=@root, value)
-        if !root.nil?
+        if root.nil?
             return Node.new(value)
         else
             if root.data == value
@@ -37,7 +37,7 @@ class Tree
                 root.left = insert_node(root.left, value)
             end
         end
-        root
+        return root
     end
 
     
