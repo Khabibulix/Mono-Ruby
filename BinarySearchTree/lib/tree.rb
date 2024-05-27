@@ -60,8 +60,10 @@ class Tree
         else
             return root.right if root.left.nil?
             return root.left if root.right.nil?
-            root.data = 
+            root.data = get_min_value(root.right)
+            root.right = delete_node(root.right, root.data)
         end
+        root
     end
 
     
