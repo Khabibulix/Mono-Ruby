@@ -118,6 +118,14 @@ class Tree
             
         end
     end
+
+    def height(node= @root, count = -1)
+        return count if node.nil?
+        count += 1
+        [height(node.left, count), height(node.right, count)].max
+    end
+
+
     
 
     

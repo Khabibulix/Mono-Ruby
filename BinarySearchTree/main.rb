@@ -6,9 +6,10 @@ t = Tree.new([1, 3, 4, 4, 5, 7, 7, 8, 9, 9, 23, 67, 324, 6345])
 # t.delete_node(67)
 t.pretty_print
 # p t.find(5)
-#p t.level_order
+#t.level_order
 #t.inorder
-t.postorder
+#t.postorder
+#p t.height
 
 
 
