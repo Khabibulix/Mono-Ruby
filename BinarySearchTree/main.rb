@@ -10,6 +10,7 @@ t.pretty_print
 #t.inorder
 #t.postorder
 #p t.height
+p t.depth(t.root)
 
 
 

@@ -121,8 +121,17 @@ class Tree
 
     def height(node= @root, count = -1)
         return count if node.nil?
-        count += 1
-        [height(node.left, count), height(node.right, count)].max
+        [height(node.left, count + 1), height(node.right, count + 1)].max
+    end
+
+    def depth(node, root = @root, count = 0)
+        return count if node.data == root.data
+
+        if node.data < root.data
+        depth(node, root.left, count + 1)
+        else
+        depth(node, root.right, count + 1)
+        end
     end
 
 
