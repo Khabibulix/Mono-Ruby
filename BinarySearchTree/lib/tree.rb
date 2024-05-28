@@ -77,6 +77,22 @@ class Tree
         end
     end
 
+    def level_order
+        result_array = []
+        visited_nodes = [@root]
+
+        until visited_nodes.empty?
+            current_node = visited_nodes.pop
+            
+            visited_nodes.unshift(current_node.left) if current_node.left
+            visited_nodes.unshift(current_node.right) if current_node.right
+
+            result_array.push(current_node.data)
+        end
+
+        
+        result_array
+    end
     
     
 
