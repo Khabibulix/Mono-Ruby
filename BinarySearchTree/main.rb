@@ -10,7 +10,11 @@ t.pretty_print
 #t.inorder
 #t.postorder
 #p t.height
-p t.depth(t.root)
+# p t.depth(t.root)
+# p t.balanced?
+# t.insert_node(400)
+#t.insert_node(500)
+#p t.balanced?
 
 
 

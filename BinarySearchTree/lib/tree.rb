@@ -128,10 +128,28 @@ class Tree
         return count if node.data == root.data
 
         if node.data < root.data
-        depth(node, root.left, count + 1)
+          depth(node, root.left, count + 1)
         else
-        depth(node, root.right, count + 1)
+          depth(node, root.right, count + 1)
         end
+    end
+
+    def balanced?(root = @root)
+        return true if root.nil?
+
+        left_height = height(root.left)
+        right_height = height(root.right)
+
+        left_balance = balanced?(root.left)
+        right_balance = balanced?(root.right)
+        balance_rule = (left_height - right_height).abs <= 1
+
+        if left_balance && right_balance && balance_rule
+            return true
+        end
+
+        false
+
     end
 
 
