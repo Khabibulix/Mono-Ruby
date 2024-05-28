@@ -100,9 +100,24 @@ class Tree
             print "#{node.data} "
             inorder(node.right)
         end
+    end
 
+    def preorder(node=@root)
+        if node
+            print "#{node.data} "
+            preorder(node.left)
+            preorder(node.right)
+        end
     end
     
+    def postorder(node=@root)
+        if node
+            postorder(node.left)
+            postorder(node.right)
+            print "#{node.data} "
+            
+        end
+    end
     
 
     
