@@ -93,6 +93,15 @@ class Tree
         
         result_array
     end
+
+    def inorder(node=@root)
+        if node
+            inorder(node.left)
+            print "#{node.data} "
+            inorder(node.right)
+        end
+
+    end
     
     
 
