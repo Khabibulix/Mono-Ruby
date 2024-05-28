@@ -94,29 +94,32 @@ class Tree
         result_array
     end
 
-    def inorder(node=@root)
+    def inorder(node=@root, arr = [])
         if node
-            inorder(node.left)
-            print "#{node.data} "
-            inorder(node.right)
+            inorder(node.left, arr)
+            arr.push(node.data)
+            inorder(node.right, arr)
         end
+        arr
     end
 
-    def preorder(node=@root)
+    def preorder(node=@root, arr = [])
         if node
-            print "#{node.data} "
-            preorder(node.left)
-            preorder(node.right)
+            arr.push(node.data)
+            preorder(node.left, arr)
+            preorder(node.right, arr)
         end
+        arr
     end
     
-    def postorder(node=@root)
+    def postorder(node=@root, arr = [])
         if node
-            postorder(node.left)
-            postorder(node.right)
-            print "#{node.data} "
+            postorder(node.left, arr)
+            postorder(node.right, arr)
+            arr.push(node.data)
             
         end
+        arr
     end
 
     def height(node= @root, count = -1)
@@ -150,6 +153,10 @@ class Tree
 
         false
 
+    end
+
+    def rebalance
+        @root = build_tree(inorder)
     end
 
 

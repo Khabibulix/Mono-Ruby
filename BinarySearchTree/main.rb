@@ -1,21 +1,40 @@
 require_relative 'lib/tree.rb'
 
 
-t = Tree.new([1, 3, 4, 4, 5, 7, 7, 8, 9, 9, 23, 67, 324, 6345])
-# t.insert_node(25)
-# t.delete_node(67)
-t.pretty_print
-# p t.find(5)
-#t.level_order
-#t.inorder
-#t.postorder
-#p t.height
-# p t.depth(t.root)
-# p t.balanced?
-# t.insert_node(400)
-#t.insert_node(500)
-#p t.balanced?
+t = Tree.new((Array.new(15) { rand(1..100) }))
+p t.balanced?
 
+puts "Level order"
+p t.level_order
 
+puts "Pre order"
+p t.preorder
 
+puts "Post order"
+p t.postorder
+
+puts "In order"
+p t.inorder
+
+t.insert_node(45)
+t.insert_node(48)
+t.insert_node(49)
+
+p t.balanced?
+
+t.rebalance
+
+p t.balanced?
+
+puts "Level order"
+p t.level_order
+
+puts "Pre order"
+p t.preorder
+
+puts "Post order"
+p t.postorder
+
+puts "In order"
+p t.inorder
 
