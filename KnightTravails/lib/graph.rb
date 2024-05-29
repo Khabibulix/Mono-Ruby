@@ -7,7 +7,10 @@ class Graph
     end
     
     def print_matrix
-        @matrix.each {|row| print "#{row}\n"}
+        @matrix.each do |row| 
+            p row.join(" | ")
+            # p " _  " * @width
+        end
     end
 
     def add_edge(node1, node2)
@@ -18,5 +21,4 @@ class Graph
     def has_edge?(node1, node2)
         @matrix[node1][node2] == 1
     end
-
 end
