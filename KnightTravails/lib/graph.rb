@@ -1,5 +1,7 @@
+# Create a graph of nodes
 class Graph
-    def initialize(width)
+    attr_accessor :matrix
+    def initialize(width=10)
         @width = width
         @matrix = Array.new(width) {Array.new(width, 0)}
     end
@@ -18,8 +20,3 @@ class Graph
     end
 
 end
-
-g = Graph.new(5)
-g.add_edge(0,2)
-g.print_matrix
-p g.has_edge?(0,2)
