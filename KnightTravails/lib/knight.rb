@@ -17,23 +17,21 @@ class Knight
         @y_pos = y_pos
     end
 
-    #move_valid?([0,1], [0,2])
-    def move_valid?(initial_pos, next_pos)
-        
-        MOVE_SET.each do |move|
-            x_pos_valid = initial_pos[0] + move[0] == next_pos[0] && next_pos[0].between?(0,8)
-            y_pos_valid = initial_pos[1] + move[1] == next_pos[1] && next_pos[1].between?(0,8)
-            if x_pos_valid && y_pos_valid
-                return true
-            end
+    def get_moves(pos=[x_pos, y_pos])
+        moves = {}
+        MOVE_SET.each_with_index do |move, move_index|
+            if (move[0] + pos[0]).between?(0,8) && (move[1] + pos[1]).between?(0,8)
+                    moves[move_index] = [move[0] + pos[0], move[1] + pos[1]]
+            end            
         end
-        false
+        moves
+        
     end
 
-    def get_moves
-        p "Nothing here for now"
+    def move
+        p "Idem"
     end
 end
 
 knight = Knight.new(4,4)
-p knight.move_valid?([4,4],[5,2])
+p knight.get_moves([0,8])
