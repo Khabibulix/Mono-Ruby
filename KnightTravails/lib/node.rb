@@ -1,7 +1,7 @@
 class Node 
-    attr_accessor :position, :childs, :parent
-    def initialize(position, childs, parent)
-        @position = position
+    attr_accessor :childs, :parent
+    def initialize(childs, parent)
         @childs = childs
         @parent = parent
+    end
 end
