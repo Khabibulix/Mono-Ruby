@@ -35,13 +35,12 @@ class Knight
     def knight_moves(
         current_pos,
         result_pos,
-        shortest_path = 100,
         possibles_paths = [current_pos],
         iteration = 1,
         nodes_to_check = [])    
 
 
-        if iteration == 10
+        if iteration == 30
             return "Finish"
         else
             #Creating nodes for all possible moves from current position
@@ -54,14 +53,12 @@ class Knight
 
             if node_values.include?(result_pos)
                 nodes_to_check.each do |node|
-                    p node
                     if node.value == result_pos
-                        shortest_path = iteration if iteration < shortest_path
                         possibles_paths.push(node.get_path(node))
                     end
                 end
             else    
-                knight_moves(result_pos, nodes_to_check.pop.value, shortest_path, possibles_paths, iteration + 1, nodes_to_check)
+                knight_moves(result_pos, nodes_to_check.pop.value, possibles_paths, iteration + 1, nodes_to_check)
             end
         end
 
@@ -70,13 +67,12 @@ class Knight
         return [current_pos, result_pos] if get_moves(current_pos).value?(result_pos) && iteration == 1
 
         
-        possibles_paths.uniq           
+        return "You have a path in #{possibles_paths.length} steps with #{possibles_paths}"       
     end    
 
 end
 
-knight = Knight.new
-p knight.knight_moves([0,0],[3,3])
+
 
 
 
