@@ -36,53 +36,47 @@ class Knight
         current_pos,
         result_pos,
         shortest_path = 100,
-        possibles_paths = [],
+        possibles_paths = [current_pos],
         iteration = 1,
-        nodes_to_check = [])       
-        
-        moves = get_moves(current_pos)
+        nodes_to_check = [])    
 
-        # p current_pos
 
-        if iteration == 2
+        if iteration == 10
             return "Finish"
         else
-            moves.each do |move|
+            #Creating nodes for all possible moves from current position
+            get_moves(current_pos).each do |move|                
                 nodes_to_check.unshift(Node.new(move[1], current_pos)).uniq!
             end 
 
-            p nodes_to_check
+            #Retrieving values for nodes
+            node_values = nodes_to_check.collect{|node| node.value}
 
-
-            if moves.value?(result_pos)
-                moves.each do |cell|
-                    if cell[1] == result_pos
+            if node_values.include?(result_pos)
+                nodes_to_check.each do |node|
+                    p node
+                    if node.value == result_pos
                         shortest_path = iteration if iteration < shortest_path
-                        possibles_paths.push([current_pos, cell[1]])
-                        p "test"
-                        return possibles_paths
+                        possibles_paths.push(node.get_path(node))
                     end
                 end
             else    
-                knight_moves(result_pos, nodes_to_check.pop.childs, shortest_path, possibles_paths, iteration + 1, nodes_to_check)
+                knight_moves(result_pos, nodes_to_check.pop.value, shortest_path, possibles_paths, iteration + 1, nodes_to_check)
             end
         end
 
 
         return "Empty queue" if nodes_to_check.empty?
-        return [current_pos, result_pos] if moves.value?(result_pos) && iteration == 1
+        return [current_pos, result_pos] if get_moves(current_pos).value?(result_pos) && iteration == 1
 
-        p "Is current pos: #{current_pos}"
-        p "Is nodes_to_check: #{nodes_to_check}"
         
-        # possibles_paths.uniq   
-        nodes_to_check
-        
+        possibles_paths.uniq           
     end    
 
 end
 
 knight = Knight.new
-p knight.knight_moves([4,4], [8,3])
-p knight.knight_moves([4,4], [8,3]).pop
+p knight.knight_moves([0,0],[3,3])
+
+
 

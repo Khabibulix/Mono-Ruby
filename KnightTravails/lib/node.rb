@@ -8,7 +8,7 @@ class Node
     def get_path(node, path_array=[node.value])
         path_array.push(@parent)
         return path_array if @parent.class == Array
-        
+
         get_path(@parent, path_array)
         
     end
