@@ -10,4 +10,13 @@ class Board
     def create_grid
         Array.new(rows) {Array.new(columns, ".")}
     end
+
+    def add(column, symbol)        
+        return grid[column][-1] = symbol if grid[column].all?(".")
+        grid[column].to_enum.with_index.reverse_each do |cell, index|
+            if cell == "."
+                return grid[column][index] = symbol
+            end
+        end
+    end
 end
