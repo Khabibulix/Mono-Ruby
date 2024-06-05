@@ -1,9 +1,18 @@
 class Player
-    attr_accessor :symbols, :symbol
+    attr_accessor :symbols, :symbol, :adversary_symbol
     def initialize
         @symbols = ["\uff2f", "\u25ce"]
-        @symbol = symbols.sample
+        @symbol = grab_symbol_and_delete_it
+        @adversary_symbol = @symbols[0]
+    end
+
+    def grab_symbol_and_delete_it
+        symbol_to_return = symbols.sample
+        symbols.delete(symbol_to_return)
+        symbol_to_return
     end
 end
+
+
 
 
