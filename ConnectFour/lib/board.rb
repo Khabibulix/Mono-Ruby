@@ -10,16 +10,13 @@ class Board
     end
 
     def create_grid
-        Array.new(rows) {Array.new(columns, ".")}
-    end
-
-    def nodify_all_cells
-        @grid.each_with_index do |row, row_index|
+        grid = Array.new(rows) {Array.new(columns, ".")}
+        grid.each_with_index do |row, row_index|
             row.each_with_index do |cell, col_index|
-                @grid[row_index][col_index] = Node.new([row_index, col_index])
+                grid[row_index][col_index] = Node.new([row_index, col_index])
             end
         end
-        @grid
+        grid
     end
 
     def add(column, symbol)        
@@ -28,4 +25,24 @@ class Board
             return grid[column][index].value = symbol if node.value == "."
         end
     end
+
+    def get_non_empty_nodes
+        result = []
+        @grid.each do |row|
+            row.each do |cell|
+                result.push(cell) if cell.value != "."                
+            end
+        end
+        result
+    end
+
+    def clear
+        @grid.each do |row|
+            row.each do |cell|
+                cell.value = "."                
+            end
+        end
+    end
+
+
 end

@@ -4,7 +4,7 @@ describe do
 
     before(:all) do 
         @board = Board.new
-        @board.nodify_all_cells
+        @board.clear
     end
 
     specify "Total cells should be 42 or 6*7" do
@@ -28,6 +28,16 @@ describe do
 
     specify "Grid item should be of Node Class after nodification" do
         expect(@board.grid[0][0].class).to eq Node
+    end
+
+    specify "After clearing the grid, length should be 0" do
+        @board.clear
+        expect(@board.get_non_empty_nodes.length).to eq 0
+    end
+
+    specify "Array should not be empty" do
+        @board.add(1, "X")
+        expect(@board.get_non_empty_nodes.length).not_to eq 0
     end
 
 end
