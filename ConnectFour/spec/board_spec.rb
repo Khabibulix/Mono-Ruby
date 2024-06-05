@@ -40,4 +40,12 @@ describe do
         expect(@board.get_non_empty_nodes.length).not_to eq 0
     end
 
+    specify "Should grab all symbols in parameters" do
+        @board.clear
+        @board.add(1, "O")
+        @board.add(1, "X")
+        @board.add(1, "X")
+        expect(@board.separate_by_symbol("X").length).to eq 2
+    end
+
 end

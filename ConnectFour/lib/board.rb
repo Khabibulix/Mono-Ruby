@@ -44,5 +44,10 @@ class Board
         end
     end
 
+    def separate_by_symbol(symbol)
+        array = get_non_empty_nodes
+        array.select{|node| node.value == symbol}
+    end
+
 
 end
