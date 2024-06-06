@@ -57,4 +57,13 @@ describe do
         expect(@board.victory?("X")).to be true
     end
 
+    specify "Victory check for rows should be true" do
+        @board.clear
+        @board.add(1, "X")
+        @board.add(2, "X")
+        @board.add(3, "X")
+        @board.add(4, "X")
+        expect(@board.victory?("X")).to be true
+    end
+
 end

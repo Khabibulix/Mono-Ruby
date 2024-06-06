@@ -48,27 +48,35 @@ class Board
         get_non_empty_nodes.select{|node| node.value == symbol}
     end
 
-    def victory?(symbol)
-        array_to_check = separate_by_symbol(symbol)
-        columns_hash = Hash.new {|h,k| h[k]=[]}
+    def searching_for_victory_in_hash(hash)
         temp_array = []
-
-        #Populating the hash
-        array_to_check.each do |node|
-            columns_hash[node.position[0]].push(node.position)
-        end
-
-        columns_hash.keys.each do |key|
-            if columns_hash[key].length >= 4
-                #4 cells in one column
-                columns_hash[key].each{|node| temp_array.push(node[1])}
+        hash.keys.each do |key|
+            if hash[key].length >= 4
+                hash[key].each{|node| temp_array.push(node[1])}
                 if temp_array == temp_array[0].upto(temp_array[-1]).to_a
                     return true
                 end                
             end
         end
+    end
 
-        return false        
+    def victory?(symbol)
+        array_to_check = separate_by_symbol(symbol)
+        columns_hash = Hash.new {|h,k| h[k]=[]}
+        rows_hash = Hash.new {|h,k| h[k]=[]}
+        temp_array = []
+
+        #Populating the hash
+        array_to_check.each do |node|
+            columns_hash[node.position[0]].push(node.position)
+            rows_hash[node.position[1]].push(node.position)
+        end
+
+        if searching_for_victory_in_hash(columns_hash) || searching_for_victory_in_hash(rows_hash)
+            return true      
+        end  
+
+        false        
     end
 
 
