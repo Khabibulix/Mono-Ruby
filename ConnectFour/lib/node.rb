@@ -1,11 +1,7 @@
-NEIGHBORS_CALC = [
+DIAGONALS_NEIGHBORS_CALC = [
     [-1, -1],
-    [-1, 0],
     [-1, 1],
-    [0, -1],
-    [0, 1],
     [1, -1],
-    [1, 0],
     [1, 1]
 ].freeze
 
@@ -19,7 +15,7 @@ class Node
 
     def get_neighbors
         neighbors = []
-        NEIGHBORS_CALC.each do |pos|
+        DIAGONALS_NEIGHBORS_CALC.each do |pos|
             if (position[0] + pos[0]).between?(0,8) && (position[1] + pos[1]).between?(0,8)
                 neighbors.push([position[0] + pos[0], position[1] + pos[1]])
             end

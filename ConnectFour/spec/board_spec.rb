@@ -59,9 +59,22 @@ describe do
 
     specify "Victory check for rows should be true" do
         @board.clear
-        @board.add(1, "X")
+        @board.add(4, "X")
         @board.add(2, "X")
+        @board.add(1, "X")
         @board.add(3, "X")
+        @board.add(4, "X")
+        expect(@board.victory?("X")).to be true
+    end
+
+    specify "Victory check for diagonals should be true" do
+        @board.clear
+        @board.add(1, "X")
+        @board.add(2, "O")
+        @board.add(2, "X")
+        2.times {@board.add(3, "O")}
+        @board.add(3, "X")
+        3.times {@board.add(4, "O")}
         @board.add(4, "X")
         expect(@board.victory?("X")).to be true
     end
