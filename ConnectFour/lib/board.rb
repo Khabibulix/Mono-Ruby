@@ -19,7 +19,7 @@ class Board
         grid
     end
 
-    def add(column, symbol)        
+    def add(column, symbol)      
         return grid[column][-1] = symbol if grid[column].all?(".")
         grid[column].to_enum.with_index.reverse_each do |node, index|
             return grid[column][index].value = symbol if node.value == "."
@@ -45,9 +45,32 @@ class Board
     end
 
     def separate_by_symbol(symbol)
-        array = get_non_empty_nodes
-        array.select{|node| node.value == symbol}
+        get_non_empty_nodes.select{|node| node.value == symbol}
+    end
+
+    def victory?(symbol)
+        array_to_check = separate_by_symbol(symbol)
+        columns_hash = Hash.new {|h,k| h[k]=[]}
+        temp_array = []
+
+        #Populating the hash
+        array_to_check.each do |node|
+            columns_hash[node.position[0]].push(node.position)
+        end
+
+        columns_hash.keys.each do |key|
+            if columns_hash[key].length >= 4
+                #4 cells in one column
+                columns_hash[key].each{|node| temp_array.push(node[1])}
+                if temp_array == temp_array[0].upto(temp_array[-1]).to_a
+                    return true
+                end                
+            end
+        end
+
+        return false        
     end
 
 
 end
+

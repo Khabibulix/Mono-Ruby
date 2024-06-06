@@ -23,7 +23,7 @@ describe do
     specify "Adding to the grid with pawn at the bottom should add on top" do
         @board.add(0, "X")
         @board.add(0, "X")
-        expect(@board.grid[0][-2].value).to eq "X"
+        expect(@board.grid[0][5].value).to eq "X"
     end
 
     specify "Grid item should be of Node Class after nodification" do
@@ -46,6 +46,15 @@ describe do
         @board.add(1, "X")
         @board.add(1, "X")
         expect(@board.separate_by_symbol("X").length).to eq 2
+    end
+
+    specify "Victory check for column should be true" do
+        @board.clear
+        @board.add(1, "X")
+        @board.add(1, "X")
+        @board.add(1, "X")
+        @board.add(1, "X")
+        expect(@board.victory?("X")).to be true
     end
 
 end
