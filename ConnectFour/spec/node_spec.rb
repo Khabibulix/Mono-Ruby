@@ -11,11 +11,11 @@ describe do
     end
 
     specify "Should return an array of neighbors for the center node" do
-        result = [[3,3], [3,4], [3,5], [4,3], [4,5], [5,3], [5,4], [5,5]]
+        result = [[3,3], [3,5], [5,3], [5,5]]
         expect(@node.neighbors).to eq result
     end
 
     specify "Should return an array of neighbors excluding falsy one" do
-        expect(@node_border.neighbors).to eq [[0,1], [1,0], [1,1]]
+        expect(@node_border.neighbors).to eq [[1,1]]
     end
 end

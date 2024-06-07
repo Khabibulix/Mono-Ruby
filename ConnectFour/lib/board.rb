@@ -8,7 +8,7 @@ class Board
     end
 
     def create_grid
-        grid = Array.new(7) {Array.new(6, ".")}
+        grid = Array.new(6) {Array.new(7, ".")}
         grid.each_with_index do |row, row_index|
             row.each_with_index do |cell, col_index|
                 grid[row_index][col_index] = Node.new([row_index, col_index])
@@ -17,16 +17,28 @@ class Board
         grid
     end
 
-    def add(column, symbol)      
-        return grid[column][-1] = symbol if grid[column].all?(".")
-        grid[column].to_enum.with_index.reverse_each do |node, index|
-            return grid[column][index].value = symbol if node.value == "."
-        end
+    def add(column, symbol)
+        array_column = []
+        c = 0
+        
+        6.times do      
+            array_column.push(grid[c].values_at(column))
+            c += 1
+        end        
+
+        return grid[-1][column].value = symbol if array_column.all?{|node| node[0].value == "."}
+        
+        row_of_last_empty_element = array_column.select{|e| e[0].value == "."}[-1][-1].position[0]
+        return grid[row_of_last_empty_element][column].value = symbol
+
+        
+        
+
     end
 
     def get_non_empty_nodes
         result = []
-        @grid.each do |row|
+        grid.each do |row|
             row.each do |cell|
                 result.push(cell) if cell.value != "."                
             end
@@ -36,6 +48,12 @@ class Board
 
     def separate_by_symbol(symbol)
         get_non_empty_nodes.select{|node| node.value == symbol}
+    end
+
+    def display
+        @grid.each do |row|
+            p row.map{|cell| cell.value}
+        end
     end
 
     def clear
@@ -59,7 +77,6 @@ class Board
         end
     end
 
-    #checking_for_left_diagonal([1,4], "X")
     def checking_for_left_diagonal(pos, symbol)
         row = pos[0]
         col = pos[1]
@@ -93,3 +110,6 @@ class Board
 
 end
 
+b = Board.new
+p b.add(1, "X")
+b.display

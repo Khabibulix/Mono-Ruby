@@ -14,4 +14,5 @@ describe do
     specify "The player and the ennemy shouldn't have the same symbol" do
         expect(@player.symbol).not_to eq @player.adversary_symbol
     end
+    
 end
