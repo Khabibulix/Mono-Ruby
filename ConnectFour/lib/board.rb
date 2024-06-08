@@ -63,7 +63,11 @@ class Board
             end
         end
     end
-    
+
+    def inside?(pos)
+        return true if pos[0].between?(0,5) && pos[1].between?(0,6)
+        return false
+    end
 
     def searching_for_victory_in_hash(hash)
         temp_array = []
@@ -78,16 +82,29 @@ class Board
     end
 
     def checking_for_left_diagonal(pos, symbol)
-        row = pos[0]
+        row = pos[0]    
         col = pos[1]
-        return true if grid[row - 1][col - 1] == symbol && grid[row - 2][col - 2] == symbol && grid[row - 3][col - 3] == symbol
+        return false if col < 4
+        #Bottom left diagonal computed
+        if row < 2
+            return grid[row+1][col-1].value == symbol && grid[row+2][col-2].value == symbol && grid[row+3][col-3].value == symbol
+        #Top left diagonal computed
+        else
+            return grid[row-1][col-1].value == symbol && grid[row-2][col-2].value == symbol && grid[row-3][col-3].value == symbol
+        end
     end
 
     def checking_for_right_diagonal(pos, symbol)
         row = pos[0]
         col = pos[1]
-        return true if grid[row + 1][col + 1] == symbol && grid[row + 2][col + 2] == symbol && grid[row + 3][col + 3] == symbol
-    
+        return false if col > 4
+        #Bottom right diagonal computed
+        if row < 2
+            return grid[row+1][col+1].value == symbol && grid[row+2][col+2].value == symbol && grid[row+3][col+3].value == symbol
+        #Top right diagonal computed
+        else
+            return grid[row-1][col+1].value == symbol && grid[row-2][col+2].value == symbol && grid[row-3][col+3].value == symbol
+        end
     end
 
     def victory?(symbol)
@@ -99,6 +116,7 @@ class Board
         array_to_check.each do |node|
             columns_hash[node.position[0]].push(node.position)
             rows_hash[node.position[1]].push(node.position)
+            p node
             return true if checking_for_left_diagonal(node.position, symbol) || checking_for_right_diagonal(node.position, symbol)
         end        
         
@@ -110,6 +128,4 @@ class Board
 
 end
 
-b = Board.new
-p b.add(1, "X")
-b.display
+   

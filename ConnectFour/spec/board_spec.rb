@@ -67,7 +67,7 @@ describe do
         expect(@board.victory?("X")).to be true
     end
 
-    specify "Victory check for diagonals should be true" do
+    specify "Victory check for right diagonals should be true" do
         @board.clear
         @board.add(1, "X")
         @board.add(2, "O")
@@ -76,7 +76,23 @@ describe do
         @board.add(3, "X")
         3.times {@board.add(4, "O")}
         @board.add(4, "X")
-        expect(@board.victory?("X")).to be true
+        expect(@board.checking_for_right_diagonal([5,1], "X")).to be true
+    end
+
+    specify "Victory check for right diagonals should be true" do
+        @board.clear
+        @board.add(6, "X")
+        @board.add(5, "O")
+        @board.add(5, "X")
+        2.times {@board.add(4, "O")}
+        @board.add(4, "X")
+        3.times {@board.add(3, "O")}
+        @board.add(3, "X")
+        expect(@board.checking_for_left_diagonal([5,6], "X")).to be true
+    end
+
+    specify "Should check if node is in grid" do
+        expect(@board.inside?([6,3])).to be false
     end
 
 end
