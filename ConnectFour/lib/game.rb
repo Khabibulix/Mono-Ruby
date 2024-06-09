@@ -1,6 +1,6 @@
 class Game 
     def welcome_player
-        puts "Hey there, welcome to my Connect Four game!"
+        puts "\nHey there, welcome to my Connect Four game!"
         puts "The rules are simple, I'm going to ask you a number between 1 and 7"
         puts "This number is going to represent the column where you want to add your pawn"
     end
@@ -12,6 +12,8 @@ class Game
         puts "Please enter a number between 1 and 7"
         get_input
     end
+
+    def get_computer_choice
+        rand(0...6)
+    end
 end
-game = Game.new
-game.welcome_player

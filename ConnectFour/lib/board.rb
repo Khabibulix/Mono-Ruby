@@ -52,7 +52,7 @@ class Board
 
     def display
         @grid.each do |row|
-            p row.map{|cell| cell.value}
+            p row.map{|cell| cell.value}.join("  ")
         end
     end
 

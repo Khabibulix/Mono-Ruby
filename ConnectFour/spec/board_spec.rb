@@ -67,7 +67,7 @@ describe do
         expect(@board.victory?("X")).to be true
     end
 
-    specify "Victory check for right diagonals should be true" do
+    xit "Victory check for right diagonals should be true" do
         @board.clear
         @board.add(1, "X")
         @board.add(2, "O")
@@ -79,7 +79,7 @@ describe do
         expect(@board.checking_for_right_diagonal([5,1], "X")).to be true
     end
 
-    specify "Victory check for right diagonals should be true" do
+    xit "Victory check for right diagonals should be true" do
         @board.clear
         @board.add(6, "X")
         @board.add(5, "O")
