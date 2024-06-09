@@ -72,13 +72,18 @@ class Board
     def searching_for_victory_in_hash(hash)
         temp_array = []
         hash.keys.each do |key|
+            p hash[key].length
             if hash[key].length >= 4
                 hash[key].each{|node| temp_array.push(node[1])}
                 if temp_array == temp_array[0].upto(temp_array[-1]).to_a
                     return true
                 end                
             end
+            p "not in if"
         end
+        
+        p temp_array
+        return false
     end
 
     def checking_for_left_diagonal(pos, symbol)
@@ -107,20 +112,35 @@ class Board
         end
     end
 
-    def victory?(symbol)
+    #populate_hash(hash_name, "row"/"col", "X")
+    def populate_hash(hash, mode, symbol)
         array_to_check = separate_by_symbol(symbol)
+        case mode
+        when "col"
+            array_to_check.each do |node|   
+                hash[node.position[1]].push(node.position)
+            end       
+            
+        when "row"
+            array_to_check.each do |node|
+                hash[node.position[0]].push(node.position)
+            end
+        end
+        hash
+    end
+
+    def victory?(symbol)
+        return false if separate_by_symbol(symbol).length < 4
+
         columns_hash = Hash.new {|h,k| h[k]=[]}
         rows_hash = Hash.new {|h,k| h[k]=[]}
-
-        # Populating the hash
-        array_to_check.each do |node|
-            columns_hash[node.position[0]].push(node.position)
-            rows_hash[node.position[1]].push(node.position)
-            p node
-            return true if checking_for_left_diagonal(node.position, symbol) || checking_for_right_diagonal(node.position, symbol)
-        end        
         
+        populate_hash(columns_hash, "col","X")
+        populate_hash(rows_hash, "row","X")
+
         return true if searching_for_victory_in_hash(columns_hash) || searching_for_victory_in_hash(rows_hash)
+
+        return true if searching_for_victory_in_hash(rows_hash)
         
         return false        
     end
@@ -128,4 +148,12 @@ class Board
 
 end
 
-   
+b = Board.new
+b.clear
+b.add(0, "O")
+b.add(2, "O")
+b.add(4, "O")
+b.add(6, "O")
+test_hash = b.populate_hash(Hash.new {|h,k| h[k]=[]}, "row", "O")
+p test_hash[5].length
+# b.searching_for_victory_in_hash(test_hash)
