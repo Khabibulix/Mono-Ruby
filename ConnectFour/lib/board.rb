@@ -72,17 +72,13 @@ class Board
     def searching_for_victory_in_hash(hash)
         temp_array = []
         hash.keys.each do |key|
-            p hash[key].length
             if hash[key].length >= 4
                 hash[key].each{|node| temp_array.push(node[1])}
                 if temp_array == temp_array[0].upto(temp_array[-1]).to_a
                     return true
                 end                
             end
-            p "not in if"
         end
-        
-        p temp_array
         return false
     end
 
@@ -115,6 +111,7 @@ class Board
     #populate_hash(hash_name, "row"/"col", "X")
     def populate_hash(hash, mode, symbol)
         array_to_check = separate_by_symbol(symbol)
+
         case mode
         when "col"
             array_to_check.each do |node|   
@@ -135,14 +132,13 @@ class Board
         columns_hash = Hash.new {|h,k| h[k]=[]}
         rows_hash = Hash.new {|h,k| h[k]=[]}
         
-        populate_hash(columns_hash, "col","X")
-        populate_hash(rows_hash, "row","X")
+        populate_hash(columns_hash, "col", symbol)
+        populate_hash(rows_hash, "row", symbol)
+        p columns_hash
 
-        return true if searching_for_victory_in_hash(columns_hash) || searching_for_victory_in_hash(rows_hash)
-
-        return true if searching_for_victory_in_hash(rows_hash)
-        
-        return false        
+        return true if searching_for_victory_in_hash(columns_hash) 
+        return true if searching_for_victory_in_hash(rows_hash)        
+        return false
     end
 
 
@@ -150,10 +146,6 @@ end
 
 b = Board.new
 b.clear
-b.add(0, "O")
-b.add(2, "O")
-b.add(4, "O")
-b.add(6, "O")
-test_hash = b.populate_hash(Hash.new {|h,k| h[k]=[]}, "row", "O")
-p test_hash[5].length
+4.times {b.add(1, "O")}
+p b.victory?("O")
 # b.searching_for_victory_in_hash(test_hash)
