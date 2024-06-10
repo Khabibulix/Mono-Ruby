@@ -17,7 +17,6 @@ class Game
   end
 
   def get_computer_choice
-    1
-    # rand(0...6)
+    rand(0...6)
   end
 end
