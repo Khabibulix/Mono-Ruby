@@ -10,6 +10,7 @@ game = Game.new
 PLAYER_SYMBOL = player.symbol
 COMPUTER_SYMBOL = player.adversary_symbol
 
+board.clear
 game.welcome_player
 puts "Grid is currently like this: \n\n"
 board.display
@@ -18,12 +19,18 @@ board.display
 
 until board.get_non_empty_nodes.length == 42        
     input = game.get_input
-    board.add(input, PLAYER_SYMBOL)
+    board.add(input - 1, PLAYER_SYMBOL)
     board.display
-    puts "The computer is playing... Here is the grid now: \n \n"
-    computer_input = game.get_computer_choice
-    board.add(computer_input, COMPUTER_SYMBOL)
-    board.display
-    return "You lose" if board.victory?(COMPUTER_SYMBOL)
-    return "You win" if board.victory?(PLAYER_SYMBOL)
+    # puts "The computer is playing... Here is the grid now: \n \n"
+    # computer_input = game.get_computer_choice
+    # board.add(computer_input, COMPUTER_SYMBOL)
+    # board.display
+
+    # if board.victory?(COMPUTER_SYMBOL)
+    #     puts "You lose"
+    #     exit
+    if board.victory?(PLAYER_SYMBOL)
+        puts "You win"
+        exit
+    end
 end
