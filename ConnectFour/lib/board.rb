@@ -69,12 +69,17 @@ class Board
         return false
     end
 
-    def searching_for_victory_in_hash(hash)
+    def searching_for_victory_in_hash(hash, mode)
         temp_array = []
         hash.keys.each do |key|
             if hash[key].length >= 4
-                hash[key].each{|node| temp_array.push(node[1])}
-                if temp_array == temp_array[0].upto(temp_array[-1]).to_a
+                if mode == "col"
+                    hash[key].each{|node| temp_array.push(node[0])}
+                else
+                    hash[key].each{|node| temp_array.push(node[1])}
+                end
+                
+                if temp_array.sort == temp_array[0].upto(temp_array[-1]).to_a
                     return true
                 end                
             end
@@ -134,10 +139,10 @@ class Board
         
         populate_hash(columns_hash, "col", symbol)
         populate_hash(rows_hash, "row", symbol)
-        p columns_hash
 
-        return true if searching_for_victory_in_hash(columns_hash) 
-        return true if searching_for_victory_in_hash(rows_hash)        
+
+        return true if searching_for_victory_in_hash(columns_hash, "col") 
+        return true if searching_for_victory_in_hash(rows_hash, "row")        
         return false
     end
 
@@ -148,4 +153,4 @@ b = Board.new
 b.clear
 4.times {b.add(1, "O")}
 p b.victory?("O")
-# b.searching_for_victory_in_hash(test_hash)
+

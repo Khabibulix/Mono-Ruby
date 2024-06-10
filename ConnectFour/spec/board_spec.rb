@@ -182,7 +182,7 @@ describe do
         @board.add(3, "X")
         3.times{@board.add(4, "X")}
         test_hash = @board.populate_hash(Hash.new {|h,k| h[k]=[]}, "col", "X")
-        expect(@board.searching_for_victory_in_hash(test_hash)).to eq false
+        expect(@board.searching_for_victory_in_hash(test_hash, "col")).to eq false
     end
 
     specify "#Searching_for_victory_in_hash should be false for falsy row" do
@@ -192,7 +192,7 @@ describe do
         @board.add(4, "O")
         @board.add(6, "O")
         test_hash = @board.populate_hash(Hash.new {|h,k| h[k]=[]}, "row", "X")
-        expect(@board.searching_for_victory_in_hash(test_hash)).to be false
+        expect(@board.searching_for_victory_in_hash(test_hash, "row")).to be false
     end
 
     specify "If we add 4 elements at the bottom, key 'row 5' should be of length 4" do
