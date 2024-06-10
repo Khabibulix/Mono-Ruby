@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'lib/player'
 require_relative 'lib/board'
 require_relative 'lib/game'
@@ -17,22 +19,22 @@ board.display
 
 
 
-until board.get_non_empty_nodes.length == 42        
-    input = game.get_input
-    board.add(input - 1, PLAYER_SYMBOL)
-    board.display
-    puts "The computer is playing... Here is the grid now: \n \n"
-    computer_input = game.get_computer_choice
-    board.add(computer_input, COMPUTER_SYMBOL)
-    board.display
+until board.get_non_empty_nodes.length == 42
+  input = game.get_input
+  board.add(input - 1, PLAYER_SYMBOL)
+  board.display
+  puts "The computer is playing... Here is the grid now: \n \n"
+  computer_input = game.get_computer_choice
+  board.add(computer_input, COMPUTER_SYMBOL)
+  board.display
 
-    if board.victory?(COMPUTER_SYMBOL)
-        puts "You lose"
-        exit
-    end
+  if board.victory?(COMPUTER_SYMBOL)
+    puts 'You lose'
+    exit
+  end
 
-    if board.victory?(PLAYER_SYMBOL)
-        puts "You win"
-        exit
-    end
+  if board.victory?(PLAYER_SYMBOL)
+    puts 'You win'
+    exit
+  end
 end
