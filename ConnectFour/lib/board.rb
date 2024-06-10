@@ -29,7 +29,7 @@ class Board
         return grid[-1][column].value = symbol if array_column.all?{|node| node[0].value == "."}
         
         row_of_last_empty_element = array_column.select{|e| e[0].value == "."}[-1][-1].position[0]
-        return grid[row_of_last_empty_element][column].value = symbol
+        return grid[row_of_last_empty_element][column].value = symbol if inside?([row_of_last_empty_element,column])
 
         
         
@@ -132,7 +132,8 @@ class Board
     end
 
     def victory?(symbol)
-        return false if separate_by_symbol(symbol).length < 4
+        array_to_check = separate_by_symbol(symbol)
+        return false if array_to_check.length < 4
 
         columns_hash = Hash.new {|h,k| h[k]=[]}
         rows_hash = Hash.new {|h,k| h[k]=[]}
@@ -140,17 +141,17 @@ class Board
         populate_hash(columns_hash, "col", symbol)
         populate_hash(rows_hash, "row", symbol)
 
-
+        array_to_check.each do |node|   
+            return true if checking_for_left_diagonal(node.position, symbol)
+            return true if checking_for_right_diagonal(node.position, symbol)
+        end 
+        
         return true if searching_for_victory_in_hash(columns_hash, "col") 
         return true if searching_for_victory_in_hash(rows_hash, "row")        
+        
         return false
     end
 
 
 end
-
-b = Board.new
-b.clear
-4.times {b.add(1, "O")}
-p b.victory?("O")
 

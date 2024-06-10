@@ -1,7 +1,7 @@
 class Player
     attr_accessor :symbols, :symbol, :adversary_symbol
     def initialize
-        @symbols = ["\uff2f", "\u25ce"]
+        @symbols = ["O", "X"]
         @symbol = grab_symbol_and_delete_it
         @adversary_symbol = @symbols[0]
     end
