@@ -19,6 +19,3 @@ class Board
         grid[pos[0]][pos[1]] = new_value
     end
 end
-
-b = Board.new
-b.display
