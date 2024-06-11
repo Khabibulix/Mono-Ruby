@@ -1,5 +1,6 @@
 class Board
-    attr_reader :width, :height, :grid
+    attr_reader :width, :height
+    attr_accessor :grid
     def initialize(width=8)
         @width = width
         @height = width
@@ -19,3 +20,6 @@ class Board
         grid[pos[0]][pos[1]] = new_value
     end
 end
+
+$board = Board.new
+
