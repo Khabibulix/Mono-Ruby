@@ -14,6 +14,14 @@ describe "A Board in general" do
         it "a Board Row should be of class Array" do
             expect(@board.grid).to be_an_instance_of Array
         end
+        
+    end
+
+    context "at update" do
+        it "should change value correctly" do
+            @board.update_cell([4,4], "X")
+            expect(@board.grid[4][4]).to eq "X"
+        end
     end
 
 end
