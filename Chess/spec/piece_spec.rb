@@ -53,7 +53,7 @@ describe "A Rook in general" do
         end
 
         it "Should be able to move when no obstacles with same row" do
-            expect(@white_rook1.valid?([7,0], [7,1])).to be true
+            expect(@white_rook1.valid?([7,0], [7,3])).to be true
         end
 
         it "Should change cell value after moving" do

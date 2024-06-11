@@ -13,16 +13,4 @@ class Piece
         @number = number
         @board = $board
     end
-
-    def valid?(current, next_pos)
-        patterns.each do |pattern|
-            if current[0] + pattern[0] == next_pos[0] 
-                if current[1] + pattern[1] == next_pos[1]
-                   return true 
-                end
-            end
-        end
-        return false
-    end
-
 end

@@ -11,13 +11,15 @@ class Rook < Piece
         @black_pos = [[0,0], [0,7]]
         @initial_pos = color == "white" ? @white_pos[number - 1] : @black_pos[number - 1]
         @current_pos = initial_pos if @current_pos.empty?
-        @patterns = [[1,0], [-1,0], [0,1], [0,-1]]
+        @board = $board
 
     end
 
     def valid?(current, next_pos)
-        super
+        return true if current[0] == next_pos[0] || current[1] == next_pos[1]
+        false
     end
+
 
     def move(next_pos)
         if valid?(@current_pos, next_pos)
