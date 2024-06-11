@@ -1,0 +1,7 @@
+a piece has:
+. a color
+. a initial_pos that depends of the color
+. a symbol
+. a pattern
+. a list_of_moves
+. a current_position
