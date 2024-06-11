@@ -45,6 +45,25 @@ describe "A Rook in general" do
         it "Should have different position when same color" do
             expect(@white_rook1.initial_pos).not_to eq @white_rook2.initial_pos
         end
+
+        it "Should have a correct moves array" do
+            expected = [
+                [6,0],
+                [5,0],
+                [4,0],
+                [3,0],
+                [2,0],
+                [1,0],
+                [0,0],
+                [7,1],
+                [7,2],
+                [7,3],
+                [7,4],
+                [7,5],
+                [7,6],
+                [7,7]].sort
+            expect(@white_rook1.moves.sort).to eq expected
+        end
     end
 
     context "When moving" do

@@ -13,4 +13,8 @@ class Piece
         @number = number
         @board = $board
     end
+
+    def inside?(pos)
+        return true ? pos[0].between?(0,8) && pos[1].between?(0,8) : false
+    end
 end
