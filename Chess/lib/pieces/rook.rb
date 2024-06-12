@@ -6,6 +6,7 @@ class Rook < Piece
     attr_reader :number
     def initialize(color, number)
         super
+        @color = color
         @symbol = color == "white" ? "\u265C" : "\u2656"
         @possible_pos = {
             "white" => [[7,0],[7,7]],
@@ -26,13 +27,25 @@ class Rook < Piece
         super
     end
 
-
-    def generate_moves
-        super
-    end
-
     def move(next_pos)
         super
     end
 
+    def to_s
+        return "There is a #{@color} #{self.class.name} located at #{@current_pos}"
+    end
+
+    def generate_moves
+        initial_row = current_pos[0]
+        initial_col = current_pos[1]
+
+        @board.grid.each_with_index do |row, index|
+                moves.push([index, initial_col]) if index != initial_row
+                moves.push([initial_row, index]) if index != initial_col
+        end
+        moves
+    end
 end
+
+r = Rook.new("white", 1)
+p r.to_s
