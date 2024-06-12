@@ -2,8 +2,7 @@ require_relative 'piece'
 
 
 class Rook < Piece
-    attr_accessor :choices_for_black, :choices_for_white
-    attr_reader :number
+    attr_reader :number, :possible_pos
     def initialize(color, number)
         super
         @color = color
