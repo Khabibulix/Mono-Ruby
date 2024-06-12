@@ -14,6 +14,7 @@ class Piece
         @board = $board
     end
 
+    #inside?[7,0] = true
     def inside?(pos)
         return true ? pos[0].between?(0,8) && pos[1].between?(0,8) : false
     end
@@ -22,19 +23,12 @@ class Piece
         if inside?(next_pos)
             return true ? current[0] == next_pos[0] || current[1] == next_pos[1] : false
         end    
+    end    
+
+
+    def to_s
+        return "There is a #{@color} #{self.class.name} located at #{@current_pos}"
     end
-
-    def generate_moves
-        initial_row = current_pos[0]
-        initial_col = current_pos[1]
-
-        @board.grid.each_with_index do |row, index|
-                moves.push([index, initial_col]) if index != initial_row
-                moves.push([initial_row, index]) if index != initial_col
-        end
-        moves
-    end
-
 
     def move(next_pos)
         if valid?(@current_pos, next_pos)

@@ -7,7 +7,7 @@ class Rook < Piece
     def initialize(color, number)
         super
         @color = color
-        @symbol = color == "white" ? "\u265C" : "\u2656"
+        @symbol = (color == "white" ? "\u265C" : "\u2656").encode
         @possible_pos = {
             "white" => [[7,0],[7,7]],
             "black" => [[0,0], [0,7]]
@@ -32,7 +32,7 @@ class Rook < Piece
     end
 
     def to_s
-        return "There is a #{@color} #{self.class.name} located at #{@current_pos}"
+        super    
     end
 
     def generate_moves
@@ -46,6 +46,3 @@ class Rook < Piece
         moves
     end
 end
-
-r = Rook.new("white", 1)
-p r.to_s
