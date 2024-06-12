@@ -23,7 +23,3 @@ class Game
         end
     end
 end
-
-g = Game.new($board)
-g.place_pieces
-g.board.display

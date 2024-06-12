@@ -15,7 +15,6 @@ class Rook < Piece
         #If not we take it from possible_pos via number
         @initial_pos = initial_pos.empty? ? (color == "white" ? @possible_pos["white"][number - 1] : @possible_pos["black"][number - 1]) : initial_pos
         @current_pos = initial_pos if @current_pos.empty?
-        @board = $board
         @moves = generate_moves
 
     end

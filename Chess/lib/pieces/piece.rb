@@ -16,8 +16,7 @@ class Piece
 
     #inside?[7,0] = true
     def inside?(pos)
-        p pos
-        return true ? pos[0].between?(0,8) && pos[1].between?(0,8) : false
+        return true ? pos[0].between?(0,7) && pos[1].between?(0,7) : false
     end
 
     def valid?(current, next_pos)
