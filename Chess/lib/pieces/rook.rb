@@ -3,7 +3,7 @@ require_relative 'piece'
 
 class Rook < Piece
     attr_reader :number, :possible_pos
-    def initialize(color, number)
+    def initialize(color, number, initial_pos = [])
         super
         @color = color
         @symbol = (color == "white" ? "\u265C" : "\u2656").encode
@@ -11,7 +11,9 @@ class Rook < Piece
             "white" => [[7,0],[7,7]],
             "black" => [[0,0], [0,7]]
         }
-        @initial_pos = color == "white" ? @possible_pos["white"][number - 1] : @possible_pos["black"][number - 1]
+        #Used for testing, if initial_pos specified, we take it
+        #If not we take it from possible_pos via number
+        @initial_pos = initial_pos.empty? ? (color == "white" ? @possible_pos["white"][number - 1] : @possible_pos["black"][number - 1]) : initial_pos
         @current_pos = initial_pos if @current_pos.empty?
         @board = $board
         @moves = generate_moves
@@ -45,3 +47,9 @@ class Rook < Piece
         moves
     end
 end
+
+r_yes = Rook.new("white", 1)
+r_no = Rook.new("white", 1, [4,4])
+
+p r_yes.initial_pos
+p r_no.initial_pos

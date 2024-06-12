@@ -18,25 +18,28 @@ describe "A Rook in general" do
 
         it "Should have different position when same color" do
             expect(@white_rook1.initial_pos).not_to eq @white_rook2.initial_pos
-        end
+        end        
+    end
 
+    context "With artificial center position" do
         it "Should have a correct moves array" do
+            white_rook_center = Rook.new(color="white", number=1, initial_pos=[4,3])
             expected = [
-                [6,0],
-                [5,0],
-                [4,0],
-                [3,0],
-                [2,0],
-                [1,0],
-                [0,0],
-                [7,1],
-                [7,2],
+                [0,3],
+                [1,3],
+                [2,3],
+                [3,3],
+                [5,3],
+                [6,3],
                 [7,3],
-                [7,4],
-                [7,5],
-                [7,6],
-                [7,7]].sort
-            expect(@white_rook1.moves.sort).to eq expected
+                [4,0],
+                [4,1],
+                [4,2],
+                [4,4],
+                [4,5],
+                [4,6],
+                [4,7]].sort
+            expect(white_rook_center.moves.sort).to eq expected
         end
     end
 
@@ -50,8 +53,9 @@ describe "A Rook in general" do
         end
 
         it "Should change cell value after moving" do
-            @white_rook1.move([7,1])
-            expect(@white_rook1.board.grid[7][1]).to eq "\u265C"
+            white_rook_center = Rook.new(color="white", number=1, initial_pos=[4,3])
+            white_rook_center.move([4,0])
+            expect(@white_rook1.board.grid[4][0]).to eq "\u265C"
         end
     end
 end

@@ -3,7 +3,7 @@ require_relative '../board'
 class Piece
     attr_accessor :current_pos, :moves, :board
     attr_reader :color, :symbol, :initial_pos, :patterns
-    def initialize(color, number = 1)
+    def initialize(color, number = 1, initial_pos = [])
         @color = color
         @symbol = ""
         @initial_pos = []
@@ -16,6 +16,7 @@ class Piece
 
     #inside?[7,0] = true
     def inside?(pos)
+        p pos
         return true ? pos[0].between?(0,8) && pos[1].between?(0,8) : false
     end
 
