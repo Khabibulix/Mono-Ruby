@@ -32,40 +32,63 @@ class Bishop < Piece
         super    
     end
 
+    def generate_top_left_diagonal(pos)
+        8.times do
+            pos = [pos[0] - 1, pos[1] - 1]
+            inside?(pos) ? moves << pos : break                       
+        end
+    end
+
+    def generate_top_right_diagonal(pos)
+        8.times do
+            pos = [pos[0] - 1, pos[1] + 1]
+            inside?(pos) ? moves << pos : break
+        end
+    end
+
+    def generate_left_bottom_diagonal(pos)
+        8.times do
+            pos = [pos[0] + 1, pos[1] - 1]
+            inside?(pos) ? moves << pos : break
+        end
+    end
+
+    def generate_right_bottom_diagonal(pos)
+        8.times do
+            pos = [pos[0] + 1, pos[1] + 1]
+            inside?(pos) ? moves << pos : break
+        end
+    end
+
     def generate_moves     
-        potential_pos = initial_pos
+        pos = initial_pos
 
 
-        if potential_pos[1] != 0
+        if pos[1] != 0
             #Left top
-            8.times do
-                potential_pos = [potential_pos[0] - 1, potential_pos[1] - 1]
-                inside?(potential_pos) ? moves << potential_pos : break                       
+            if pos[0] != 0                
+                generate_top_left_diagonal(pos)                
             end
 
-            potential_pos = initial_pos
+            pos = initial_pos
 
-            #Left bottom diagonal
-            8.times do
-                potential_pos = [potential_pos[0] + 1, potential_pos[1] - 1]
-                inside?(potential_pos) ? moves << potential_pos : break
-            end        
+            if pos[0] != 7
+                #Left bottom diagonal
+                generate_left_bottom_diagonal(pos)    
+            end   
         end
 
-        if potential_pos[1] != 7
-
-            #Right top
-            8.times do
-                potential_pos = [potential_pos[0] - 1, potential_pos[1] + 1]
-                inside?(potential_pos) ? moves << potential_pos : break
+        if pos[1] != 7
+            if pos[0] != 0
+                #Right top
+                generate_top_right_diagonal(pos)                
             end
 
-            potential_pos = initial_pos
+            pos = initial_pos
 
-            #Right bottom diagonal
-            8.times do
-                potential_pos = [potential_pos[0] + 1, potential_pos[1] + 1]
-                inside?(potential_pos) ? moves << potential_pos : break
+            if pos[0] != 7
+                #Right bottom diagonal
+                generate_right_bottom_diagonal(pos)
             end
         end
 
