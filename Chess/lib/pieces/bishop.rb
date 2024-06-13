@@ -48,6 +48,7 @@ class Bishop < Piece
             #Left bottom diagonal
             8.times do
                 potential_pos = [potential_pos[0] + 1, potential_pos[1] - 1]
+                inside?(potential_pos) ? moves << potential_pos : break
             end        
         end
 
@@ -68,6 +69,7 @@ class Bishop < Piece
             end
         end
 
+        moves.delete_at(moves.find_index(initial_pos))
         moves
     end
 end

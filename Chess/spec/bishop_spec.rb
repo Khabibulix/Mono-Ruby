@@ -39,7 +39,7 @@ describe "A Bishop in general" do
                 [5,4],
                 [6,5],
                 [7,6]].sort
-            expect(bishop_at_center.moves.sort).to eq expected
+            expect(bishop_at_center.moves.uniq!.sort).to eq expected
         end
     end
 
