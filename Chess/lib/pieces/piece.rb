@@ -9,7 +9,6 @@ class Piece
         @initial_pos = []
         @current_pos = []
         @moves = []
-        @patterns = []
         @number = number
         @board = $board
     end

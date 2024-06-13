@@ -12,7 +12,7 @@ class Bishop < Piece
             "black" => [[0,2], [0,5]]
         }
         @initial_pos = initial_pos.empty? ? (color == "white" ? @possible_pos["white"][number - 1] : @possible_pos["black"][number - 1]) : initial_pos
-        @current_pos = initial_pos if @current_pos.empty?
+        @current_pos = @initial_pos
         @moves = generate_moves
     end
 

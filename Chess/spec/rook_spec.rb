@@ -55,7 +55,13 @@ describe "A Rook in general" do
         it "Should change cell value after moving" do
             white_rook_center = Rook.new(color="white", number=1, initial_pos=[4,3])
             white_rook_center.move([4,0])
-            expect(@white_rook1.board.grid[4][0]).to eq "\u265C"
+            expect(white_rook_center.board.grid[4][0]).to eq "\u265C"
+        end
+
+        it "Should change current position after moving" do
+            white_rook_center = Rook.new(color="white", number=1, initial_pos=[4,3])
+            white_rook_center.move([4,0])
+            expect(white_rook_center.current_pos).to eq [4,0]
         end
     end
 end
