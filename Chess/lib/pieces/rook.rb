@@ -46,9 +46,3 @@ class Rook < Piece
         moves
     end
 end
-
-r_yes = Rook.new("white", 1)
-r_no = Rook.new("white", 1, [4,4])
-
-p r_yes.initial_pos
-p r_no.initial_pos
