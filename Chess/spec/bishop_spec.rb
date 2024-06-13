@@ -24,7 +24,7 @@ describe "A Bishop in general" do
 
     context "At center" do
         it "Should have a correct moves array" do
-            bishop_at_center = Bishop.new("white", 1, [4,3])
+            bishop_at_center = Bishop.new("black", 1, [4,3])
             expected = [
                 [3,2],
                 [2,1],
@@ -39,8 +39,23 @@ describe "A Bishop in general" do
                 [5,4],
                 [6,5],
                 [7,6]].sort
-            expect(bishop_at_center.moves).to eq expected
+            expect(bishop_at_center.moves.sort).to eq expected
         end
     end
+
+    # context "At first col" do
+    #     it "Should have a correct moves array" do
+    #         bishop_at_first_col = Bishop.new("black", 1, [3,0])
+    #         expected = [
+    #             [2,1],
+    #             [1,2],
+    #             [0,3],
+    #             [4,1],
+    #             [5,2],
+    #             [6,3],
+    #             [7,4]].sort
+    #         expect(bishop_at_first_col.moves).to eq expected
+    #     end
+    # end
 
 end

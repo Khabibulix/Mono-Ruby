@@ -33,77 +33,41 @@ class Bishop < Piece
     end
 
     def generate_moves     
-        potential_pos = current_pos
-        p potential_pos
-        initial_row = potential_pos[0]
-        initial_col = potential_pos[1]
-        p initial_pos.nil?
-        if initial_col.nil?
-            p potential_pos
-        end        
+        potential_pos = initial_pos
 
 
-        if initial_col != 0
+        if potential_pos[1] != 0
             #Left top
             8.times do
-                if inside?([potential_pos[0] - 1, potential_pos[1] - 1])
-                    moves << [potential_pos[0] - 1, potential_pos[1] - 1] 
-                else
-                    break                
-                end
                 potential_pos = [potential_pos[0] - 1, potential_pos[1] - 1]
+                inside?(potential_pos) ? moves << potential_pos : break                       
             end
 
-            potential_pos = current_pos
-            initial_row = potential_pos[0]
-            initial_col = potential_pos[1]
+            potential_pos = initial_pos
 
             #Left bottom diagonal
             8.times do
-                if inside?([potential_pos[0] + 1, potential_pos[1] - 1])
-                        moves << [potential_pos[0] + 1, potential_pos[1] - 1] 
-                else
-                    break
-                end
                 potential_pos = [potential_pos[0] + 1, potential_pos[1] - 1]
             end        
         end
 
-        if initial_col != 7
-
-            potential_pos = current_pos
-            initial_row = potential_pos[0]
-            initial_col = potential_pos[1]
+        if potential_pos[1] != 7
 
             #Right top
             8.times do
-                if inside?([potential_pos[0] - 1, potential_pos[1] + 1])
-                    moves << [potential_pos[0] - 1, potential_pos[1] + 1] 
-                else
-                    break
-                end
                 potential_pos = [potential_pos[0] - 1, potential_pos[1] + 1]
+                inside?(potential_pos) ? moves << potential_pos : break
             end
 
-            potential_pos = current_pos
-            initial_row = potential_pos[0]
-            initial_col = potential_pos[1]
+            potential_pos = initial_pos
 
             #Right bottom diagonal
             8.times do
-                if inside?([potential_pos[0] + 1, potential_pos[1] + 1])
-                    moves << [potential_pos[0] + 1, potential_pos[1] + 1] 
-                else
-                    break
-                end
                 potential_pos = [potential_pos[0] + 1, potential_pos[1] + 1]
+                inside?(potential_pos) ? moves << potential_pos : break
             end
         end
 
         moves
     end
 end
-
-
-# bishop_at_first_col = Bishop.new("white", 1, [4,3])
-# p bishop_at_first_col.moves
