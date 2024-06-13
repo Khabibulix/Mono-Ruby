@@ -69,7 +69,7 @@ class Bishop < Piece
             end
         end
 
-        moves.delete_at(moves.find_index(initial_pos))
-        moves
+        moves.delete_at(moves.find_index(initial_pos)) if moves.include?(initial_pos)
+        return moves.sort.uniq
     end
 end
