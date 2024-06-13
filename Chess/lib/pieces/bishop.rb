@@ -3,7 +3,7 @@ require_relative 'piece'
 
 class Bishop < Piece
     attr_reader :number, :possible_pos, :symbol
-    def initialize(color, number, initial_pos = [])
+    def initialize(color, number = 1, initial_pos = [])
         super
         @color = color
         @symbol = (color == "white" ? "\u2657" : "\u265D").encode
@@ -59,7 +59,7 @@ class Bishop < Piece
             inside?(pos) ? moves << pos : break
         end
     end
-
+    
     def generate_moves     
         pos = initial_pos
 
