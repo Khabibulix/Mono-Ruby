@@ -20,8 +20,8 @@ class Bishop < Piece
         super
     end
 
-    def valid?(current, next_pos)
-        super
+    def valid?(current = @current_pos, next_pos)
+       inside?(next_pos) && moves.include?(next_pos) ? true : false
     end
 
     def move(next_pos)

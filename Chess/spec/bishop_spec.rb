@@ -73,6 +73,27 @@ describe "A Bishop in general" do
         end
     end
 
+    context "When moving" do
+        it "Should be able to move in diagonal" do
+            expect(@white_bishop1.valid?([4,3], [5,4])).to be true
+        end
+
+        it "Should not be able to move in line" do
+            expect(@white_bishop1.valid?([7,0], [7,3])).to be false
+        end
+
+        it "Should change cell value after moving" do
+            white_bishop_center = Bishop.new("white", 1, [4,3])
+            white_bishop_center.move([5,4])
+            expect(white_bishop_center.board.grid[5][4]).to eq white_bishop_center.symbol
+        end
+
+        it "Should change current position after moving" do
+            white_bishop_center = Bishop.new("white", 1, [1,1])
+            white_bishop_center.move([2,2])
+            expect(white_bishop_center.current_pos).to eq [2,2]
+        end
+    end
 
 
 end
