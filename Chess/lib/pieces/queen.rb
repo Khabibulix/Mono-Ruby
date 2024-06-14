@@ -19,4 +19,8 @@ class Queen < Piece
         moves_for_rook = Rook.new("white", 1, current_pos).generate_moves
         return (moves_for_bishop + moves_for_rook).sort.uniq
     end
+
+    def valid?(current = @current_pos, next_pos)
+        inside?(next_pos) && moves.include?(next_pos) ? true : false
+    end
 end

@@ -4,6 +4,8 @@ describe "A Queen in general" do
     before(:all) do
         @white_queen = Queen.new("white")
         @black_queen = Queen.new("black")
+        @queen_at_center = Queen.new("black", 1 , [4,3])
+        @queen_at_first_col = Queen.new("black", 1,  [3,0])
     end
 
     context "At creation" do
@@ -18,7 +20,6 @@ describe "A Queen in general" do
 
     context "At center" do
         it "Should have a correct moves array" do
-            queen_at_center = Queen.new("black", 1 , [4,3])
             expected = [
                 [3,2],
                 [2,1],
@@ -47,13 +48,13 @@ describe "A Queen in general" do
                 [4,5],
                 [4,6],
                 [4,7]].sort
-            expect(queen_at_center.moves).to eq expected
+            expect(@queen_at_center.moves).to eq expected
         end
     end
 
     context "At first col" do
         it "Should have a correct moves array" do
-            queen_at_first_col = Queen.new("black", 1,  [3,0])
+            
             expected = [
                 [2,1],
                 [1,2],
@@ -76,7 +77,27 @@ describe "A Queen in general" do
                 [3,5],
                 [3,6],
                 [3,7]].sort
-            expect(queen_at_first_col.moves).to eq expected
+            expect(@queen_at_first_col.moves).to eq expected
+        end
+    end
+
+    context "When moving" do
+        it "Should be able to move in diagonal" do
+            expect(@queen_at_center.valid?([4,3], [5,4])).to be true
+        end
+
+        it "Should be able to move in line too" do
+            expect(@queen_at_center.valid?([6,3])).to be true
+        end
+
+        it "Should change cell value after moving" do
+            @queen_at_center.move([5,4])
+            expect(@queen_at_center.board.grid[5][4]).to eq @queen_at_center.symbol
+        end
+
+        it "Should change current position after moving" do
+            @queen_at_center.move([4,4])
+            expect(@queen_at_center.current_pos).to eq [4,4]
         end
     end
 end
