@@ -12,7 +12,7 @@ class Board
     end
 
     def display
-        grid.each {|row| p row}
+        grid.each {|row| p row.join "  "}
     end
 
     #update_cell([3,4], "test")
