@@ -36,18 +36,54 @@ class Rook < Piece
         super    
     end
 
+    def generate_top_column(pos)
+        result = []
+        8.times do
+            pos = [pos[0] - 1, pos[1]]
+            inside?(pos) ? result << pos : break
+        end
+        result.sort
+    end
+
+    def generate_bottom_column(pos)
+        result = []
+        8.times do
+            pos = [pos[0] + 1, pos[1]]
+            inside?(pos) ? result << pos : break
+        end
+        result.sort
+    end
+
+    def generate_left_row(pos)
+        result = []
+        8.times do
+            pos = [pos[0], pos[1] - 1]
+            inside?(pos) ? result << pos : break
+        end
+        result.sort
+    end
+
+    def generate_right_row(pos)
+        result = []
+        8.times do
+            pos = [pos[0], pos[1] + 1]
+            inside?(pos) ? result << pos : break
+        end
+        result.sort
+    end
+
     def generate_moves
         initial_row = current_pos[0]
         initial_col = current_pos[1]
+        stop_iteration = false
         
 
         board.grid.each_with_index do |row, index|
-            p row
-            #p @board.grid[index][initial_col] != "." && @board.grid[index][initial_col] != @symbol                
-            moves.push([index, initial_col]) if index != initial_row
+            #stop_iteration = true if obstacle = @board.grid[index][initial_col] != "." && @board.grid[index][initial_col] != @symbol                
+            moves.push([index, initial_col]) if index != initial_row #&& !stop_iteration
 
-            #p @board.grid[initial_row][index] != "." && @board.grid[initial_row][index] != @symbol 
-            moves.push([initial_row, index]) if index != initial_col
+            #stop_iteration = true if @board.grid[initial_row][index] != "." && @board.grid[initial_row][index] != @symbol 
+            moves.push([initial_row, index]) if index != initial_col #&& !stop_iteration
         end
         moves
     end
@@ -62,4 +98,4 @@ $board.update_cell(white_rook.current_pos, white_rook.symbol)
 
 #$board.display
 # p white_rook.board.grid
-white_rook.generate_moves
+p white_rook.generate_moves

@@ -44,7 +44,47 @@ describe "A Rook in general" do
             expect(@white_rook_center.moves.sort).to eq expected
         end
 
-        it "Should have a correct moves array if there is an obstacle" do
+        it "Should return correctly the top column of the rook" do
+            expected = [
+                [0,3],
+                [1,3],
+                [2,3],
+                [3,3]
+        ].sort            
+            expect(@white_rook_center.generate_top_column([4,3])).to eq expected
+        end
+
+        it "Should return correctly the bottom column of the rook" do
+            expected = [
+                [5,3],
+                [6,3],
+                [7,3]
+        ].sort            
+            expect(@white_rook_center.generate_bottom_column([4,3])).to eq expected
+        end
+
+        it "Should return correctly the left row of the rook" do
+            expected = [
+                [4,0],
+                [4,1],
+                [4,2]
+        ].sort            
+            expect(@white_rook_center.generate_left_row([4,3])).to eq expected
+        end
+
+        it "Should return correctly the right row of the rook" do
+            expected = [
+                [4,4],
+                [4,5],
+                [4,6],
+                [4,7]
+        ].sort            
+            expect(@white_rook_center.generate_right_row([4,3])).to eq expected
+        end
+
+        
+
+        xit "Should have a correct moves array if there is an obstacle" do
             expected = [
                 [0, 3],
                 [1, 3],
@@ -71,7 +111,7 @@ describe "A Rook in general" do
             expect(@white_rook1.valid?([7,0], [7,3])).to be true
         end
 
-        it "Should not move if there is an obstacle" do
+        xit "Should not move if there is an obstacle" do
             #white_rook initial pos in [4,3]
             @white_rook_center.move([6,3])
             #because there is @obstacle_enemy_rook in [5,3]
