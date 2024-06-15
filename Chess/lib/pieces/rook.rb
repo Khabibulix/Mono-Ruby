@@ -73,29 +73,8 @@ class Rook < Piece
     end
 
     def generate_moves
-        initial_row = current_pos[0]
-        initial_col = current_pos[1]
-        stop_iteration = false
-        
-
-        board.grid.each_with_index do |row, index|
-            #stop_iteration = true if obstacle = @board.grid[index][initial_col] != "." && @board.grid[index][initial_col] != @symbol                
-            moves.push([index, initial_col]) if index != initial_row #&& !stop_iteration
-
-            #stop_iteration = true if @board.grid[initial_row][index] != "." && @board.grid[initial_row][index] != @symbol 
-            moves.push([initial_row, index]) if index != initial_col #&& !stop_iteration
-        end
-        moves
+        row = generate_left_row(current_pos) + generate_right_row(current_pos)
+        col = generate_top_column(current_pos) + generate_bottom_column(current_pos)
+        (row + col).sort
     end
 end
-
-
-obstacle_enemy_rook = Rook.new("black", 1, [5,3])
-$board.update_cell(obstacle_enemy_rook.current_pos, obstacle_enemy_rook.symbol)
-white_rook = Rook.new("white", 1, [4,3])
-$board.update_cell(white_rook.current_pos, white_rook.symbol)
-
-
-#$board.display
-# p white_rook.board.grid
-p white_rook.generate_moves
