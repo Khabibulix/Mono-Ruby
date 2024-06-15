@@ -41,7 +41,7 @@ class Rook < Piece
         initial_col = current_pos[1]
         
 
-        @board.grid.each_with_index do |row, index|
+        board.grid.each_with_index do |row, index|
             p row
             #p @board.grid[index][initial_col] != "." && @board.grid[index][initial_col] != @symbol                
             moves.push([index, initial_col]) if index != initial_row
@@ -54,11 +54,12 @@ class Rook < Piece
 end
 
 
-
-white_rook = Rook.new("white", 1, [4,3])
-$board.update_cell(white_rook.current_pos, white_rook.symbol)
 obstacle_enemy_rook = Rook.new("black", 1, [5,3])
 $board.update_cell(obstacle_enemy_rook.current_pos, obstacle_enemy_rook.symbol)
+white_rook = Rook.new("white", 1, [4,3])
+$board.update_cell(white_rook.current_pos, white_rook.symbol)
 
-$board.display
-p white_rook.moves
+
+#$board.display
+# p white_rook.board.grid
+white_rook.generate_moves

@@ -18,9 +18,10 @@ class Piece
         return true ? pos[0].between?(0,7) && pos[1].between?(0,7) : false
     end
 
+    #FIXME:
     def valid?(current, next_pos)
         if inside?(next_pos)
-            return true ? current[0] == next_pos[0] || current[1] == next_pos[1] : false
+            return true
         end    
     end    
 
