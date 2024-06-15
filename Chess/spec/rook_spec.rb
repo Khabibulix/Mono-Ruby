@@ -5,6 +5,9 @@ describe "A Rook in general" do
         @white_rook1 = Rook.new("white", 1)
         @white_rook2 = Rook.new("white", 2)
         @black_rook = Rook.new("black", 1)
+        @white_rook_center = Rook.new("white", 1, [3,2])
+        @white_rook_center_with_obstacle = Rook.new("white", 1, [4,3])
+        @obstacle_enemy_rook = Rook.new("black", 1, [5,3])
     end
 
     context "At creation" do
@@ -23,23 +26,39 @@ describe "A Rook in general" do
 
     context "With artificial center position" do
         it "Should have a correct moves array" do
-            white_rook_center = Rook.new(color="white", number=1, initial_pos=[4,3])
             expected = [
-                [0,3],
-                [1,3],
-                [2,3],
-                [3,3],
-                [5,3],
-                [6,3],
-                [7,3],
-                [4,0],
-                [4,1],
-                [4,2],
-                [4,4],
-                [4,5],
-                [4,6],
-                [4,7]].sort
-            expect(white_rook_center.moves.sort).to eq expected
+                [0, 2],
+                [1, 2],
+                [2, 2],
+                [3, 0],
+                [3, 1],
+                [3, 3],
+                [3, 4],
+                [3, 5],
+                [3, 6],
+                [3, 7],
+                [4, 2],
+                [5, 2],
+                [6, 2],
+                [7, 2]].sort
+            expect(@white_rook_center.moves.sort).to eq expected
+        end
+
+        it "Should have a correct moves array if there is an obstacle" do
+            expected = [
+                [0, 3],
+                [1, 3],
+                [2, 3],
+                [3, 3],
+                [4, 0],
+                [4, 1],
+                [4, 2],
+                [4, 4],
+                [4, 5],
+                [4, 6],
+                [4, 7],
+                [5, 3]].sort
+            expect(@white_rook_center_with_obstacle.moves.sort).to eq expected
         end
     end
 
@@ -52,16 +71,22 @@ describe "A Rook in general" do
             expect(@white_rook1.valid?([7,0], [7,3])).to be true
         end
 
-        it "Should change cell value after moving" do
-            white_rook_center = Rook.new(color="white", number=1, initial_pos=[4,3])
-            white_rook_center.move([4,0])
-            expect(white_rook_center.board.grid[4][0]).to eq "\u265C"
+        it "Should not move if there is an obstacle" do
+            #white_rook initial pos in [4,3]
+            @white_rook_center.move([6,3])
+            #because there is @obstacle_enemy_rook in [5,3]
+            expect(@white_rook_center.board.grid[6][3]).to eq "."
+        end
+            
+
+        it "Should change cell value after moving" do            
+           @white_rook_center.move([3,3])
+            expect(@white_rook_center.board.grid[3][3]).to eq "\u265C"
         end
 
         it "Should change current position after moving" do
-            white_rook_center = Rook.new(color="white", number=1, initial_pos=[4,3])
-            white_rook_center.move([4,0])
-            expect(white_rook_center.current_pos).to eq [4,0]
+            @white_rook_center.move([4,3])
+            expect(@white_rook_center.current_pos).to eq [4,3]
         end
     end
 end

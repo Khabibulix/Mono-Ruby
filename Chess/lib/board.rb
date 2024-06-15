@@ -15,6 +15,10 @@ class Board
         grid.each {|row| p row.join "  "}
     end
 
+    def empty?(pos)
+        pos = '.' ? true : false
+    end
+
     #update_cell([3,4], "test")
     def update_cell(pos, new_value)
         grid[pos[0]][pos[1]] = new_value

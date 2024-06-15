@@ -16,6 +16,7 @@ class Rook < Piece
         @initial_pos = initial_pos.empty? ? (color == "white" ? @possible_pos["white"][number - 1] : @possible_pos["black"][number - 1]) : initial_pos
         @current_pos = @initial_pos
         @moves = generate_moves
+        @board = $board
 
     end
 
@@ -24,7 +25,7 @@ class Rook < Piece
     end
 
     def valid?(current, next_pos)
-        super
+        return true ? current[0] == next_pos[0] || current[1] == next_pos[1] : false
     end
 
     def move(next_pos)
@@ -38,11 +39,26 @@ class Rook < Piece
     def generate_moves
         initial_row = current_pos[0]
         initial_col = current_pos[1]
+        
 
         @board.grid.each_with_index do |row, index|
-                moves.push([index, initial_col]) if index != initial_row
-                moves.push([initial_row, index]) if index != initial_col
+            p row
+            #p @board.grid[index][initial_col] != "." && @board.grid[index][initial_col] != @symbol                
+            moves.push([index, initial_col]) if index != initial_row
+
+            #p @board.grid[initial_row][index] != "." && @board.grid[initial_row][index] != @symbol 
+            moves.push([initial_row, index]) if index != initial_col
         end
         moves
     end
 end
+
+
+
+white_rook = Rook.new("white", 1, [4,3])
+$board.update_cell(white_rook.current_pos, white_rook.symbol)
+obstacle_enemy_rook = Rook.new("black", 1, [5,3])
+$board.update_cell(obstacle_enemy_rook.current_pos, obstacle_enemy_rook.symbol)
+
+$board.display
+p white_rook.moves
