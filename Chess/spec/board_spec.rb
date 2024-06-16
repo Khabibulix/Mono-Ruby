@@ -15,6 +15,12 @@ describe "A Board in general" do
         it "a Board Row should be of class Array" do
             expect(@board.grid).to be_an_instance_of Array
         end
+
+        it "should clear the board correctly" do
+            @board.add_piece(Rook.new("white", 1, [2,2]))
+            @board.clear
+            expect(@board.grid[2][2]).to eq "."
+        end
         
     end
 

@@ -23,7 +23,16 @@ class Board
     def add_piece(piece)
         grid[piece.initial_pos[0]][piece.initial_pos[1]] = piece.symbol
     end
+
+    def clear
+        grid.each_with_index do |row, r_index|
+            row.each_with_index do |cell, index|
+                grid[r_index][index] = "."
+            end
+        end
+    end
+
 end
 
 $board = Board.new
-
+$board.clear
