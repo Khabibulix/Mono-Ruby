@@ -35,4 +35,3 @@ class Board
 end
 
 $board = Board.new
-$board.clear

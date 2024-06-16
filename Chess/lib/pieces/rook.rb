@@ -39,7 +39,7 @@ class Rook < Piece
     def generate_top_column(pos)
         result = []
         8.times do
-            break if board.grid[pos[0]][pos[1]] != "." 
+            break if board.grid[pos[0]][pos[1]] != "." && board.grid[pos[0]][pos[1]] != @symbol
             pos = [pos[0] - 1, pos[1]]
             inside?(pos) ? result << pos : break
         end
@@ -49,9 +49,9 @@ class Rook < Piece
     def generate_bottom_column(pos)
         result = []
         8.times do    
-            break if board.grid[pos[0]][pos[1]] != "."                   
-            pos = [pos[0] + 1, pos[1]]                    
-            inside?(pos) ? result << pos : break             
+            break if board.grid[pos[0]][pos[1]] != "." && board.grid[pos[0]][pos[1]] != @symbol
+            pos = [pos[0] + 1, pos[1]]             
+            inside?(pos) ? result.push(pos) : break                 
         end
         result.sort
     end
@@ -59,7 +59,7 @@ class Rook < Piece
     def generate_left_row(pos)
         result = []
         8.times do
-            break if board.grid[pos[0]][pos[1]] != "." 
+            break if board.grid[pos[0]][pos[1]] != "." && board.grid[pos[0]][pos[1]] != @symbol
             pos = [pos[0], pos[1] - 1]
             inside?(pos) ? result << pos : break
         end
@@ -69,7 +69,7 @@ class Rook < Piece
     def generate_right_row(pos)
         result = []
         8.times do
-            break if board.grid[pos[0]][pos[1]] != "." 
+            break if board.grid[pos[0]][pos[1]] != "." && board.grid[pos[0]][pos[1]] != @symbol
             pos = [pos[0], pos[1] + 1]
             inside?(pos) ? result << pos : break
         end
@@ -82,3 +82,4 @@ class Rook < Piece
         (row + col).sort
     end
 end
+
