@@ -1,4 +1,5 @@
 require_relative '../lib/pieces/rook'
+require_relative '../lib/board'
 
 describe "A Rook in general" do
     before(:all) do
@@ -7,7 +8,8 @@ describe "A Rook in general" do
         @black_rook = Rook.new("black", 1)
         @white_rook_center = Rook.new("white", 1, [3,2])
         @white_rook_center_with_obstacle = Rook.new("white", 1, [4,3])
-        @obstacle_enemy_rook = Rook.new("black", 1, [5,3])       
+        @obstacle_rook = Rook.new("white", 1, [5,3])  
+        @board = $board   
     end
 
     context "At creation" do
@@ -45,6 +47,8 @@ describe "A Rook in general" do
         end
 
         it "Should return correctly the top column of the rook" do
+            @board.clear
+            @board.add_piece(@white_rook_center)
             expected = [
                 [0,3],
                 [1,3],
@@ -84,7 +88,10 @@ describe "A Rook in general" do
 
         
 
-        xit "Should have a correct moves array if there is an obstacle" do
+        it "Should have a correct moves array if there is an obstacle" do
+            @board.clear
+            @board.add_piece(@white_rook_center_with_obstacle)
+            @board.add_piece(@obstacle_rook)
             expected = [
                 [0, 3],
                 [1, 3],
@@ -96,8 +103,7 @@ describe "A Rook in general" do
                 [4, 4],
                 [4, 5],
                 [4, 6],
-                [4, 7],
-                [5, 3]].sort
+                [4, 7]].sort
             expect(@white_rook_center_with_obstacle.moves.sort).to eq expected
         end
     end

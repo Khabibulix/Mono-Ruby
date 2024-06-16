@@ -1,4 +1,5 @@
 require_relative '../lib/pieces/queen'
+require_relative '../lib/board'
 
 describe "A Queen in general" do
     before(:all) do
@@ -6,6 +7,7 @@ describe "A Queen in general" do
         @black_queen = Queen.new("black")
         @queen_at_center = Queen.new("black", 1 , [4,3])
         @queen_at_first_col = Queen.new("black", 1,  [3,0])
+        @board = $board
     end
 
     context "At creation" do
@@ -20,6 +22,8 @@ describe "A Queen in general" do
 
     context "At center" do
         it "Should have a correct moves array" do
+            @board.clear
+            @board.add_piece(@queen_at_center)
             expected = [
                 [3,2],
                 [2,1],
