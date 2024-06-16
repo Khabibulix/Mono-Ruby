@@ -7,7 +7,7 @@ describe "A Rook in general" do
         @black_rook = Rook.new("black", 1)
         @white_rook_center = Rook.new("white", 1, [3,2])
         @white_rook_center_with_obstacle = Rook.new("white", 1, [4,3])
-        @obstacle_enemy_rook = Rook.new("black", 1, [5,3])
+        @obstacle_enemy_rook = Rook.new("black", 1, [5,3])       
     end
 
     context "At creation" do
@@ -111,12 +111,12 @@ describe "A Rook in general" do
             expect(@white_rook1.valid?([7,0], [7,3])).to be true
         end
 
-        xit "Should not move if there is an obstacle" do
-            #white_rook initial pos in [4,3]
-            @white_rook_center.move([6,3])
-            #because there is @obstacle_enemy_rook in [5,3]
-            expect(@white_rook_center.board.grid[6][3]).to eq "."
-        end
+        # xit "Should not move if there is an obstacle" do
+        #     #white_rook initial pos in [4,3]
+        #     @white_rook_center.move([6,3])
+        #     #because there is @obstacle_enemy_rook in [5,3]
+        #     expect(@white_rook_center.board.grid[6][3]).to eq "."
+        # end
             
 
         it "Should change cell value after moving" do            

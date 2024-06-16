@@ -18,7 +18,10 @@ class Board
     #update_cell([3,4], "test")
     def update_cell(pos, new_value)
         grid[pos[0]][pos[1]] = new_value
-        return "Done"
+    end
+
+    def add_piece(piece)
+        grid[piece.initial_pos[0]][piece.initial_pos[1]] = piece.symbol
     end
 end
 

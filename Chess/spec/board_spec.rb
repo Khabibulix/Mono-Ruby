@@ -1,8 +1,9 @@
 require_relative '../lib/board.rb'
+require_relative '../lib/pieces/rook.rb'
 
 describe "A Board in general" do
     before(:all) do
-        @board = Board.new
+        @board = Board.new        
     end
 
     context "at creation" do
@@ -21,6 +22,14 @@ describe "A Board in general" do
         it "should change value correctly" do
             @board.update_cell([4,4], "X")
             expect(@board.grid[4][4]).to eq "X"
+        end
+    end
+
+    context "When creating a piece" do
+        it "should add the piece directly to board" do
+            rook = Rook.new("white", 1, [2,2])
+            @board.add_piece(rook)
+            expect(@board.grid[2][2]).to_not eq "."
         end
     end
 

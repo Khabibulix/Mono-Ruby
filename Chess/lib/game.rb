@@ -31,7 +31,7 @@ class Game
     def place_pieces
         insert_pieces
         pieces.each do |piece|
-            @board.update_cell([piece.current_pos[0],piece.current_pos[1]],piece.symbol)
+            @board.add_piece(piece)
         end
     end
 end

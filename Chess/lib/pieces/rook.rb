@@ -48,7 +48,7 @@ class Rook < Piece
     def generate_bottom_column(pos)
         result = []
         8.times do
-            pos = [pos[0] + 1, pos[1]]
+            pos = [pos[0] + 1, pos[1]]         
             inside?(pos) ? result << pos : break
         end
         result.sort
