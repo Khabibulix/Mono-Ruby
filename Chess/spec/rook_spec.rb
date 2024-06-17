@@ -80,18 +80,17 @@ describe "A Rook in general" do
         end
 
 
-        xit "Should return correctly the bottom column of the rook" do
+        it "Should return correctly the bottom column of the rook" do
             @board.clear
             @board.add_piece(@white_rook_center)
             expected = [
-                [5,3],
-                [6,3],
-                [7,3]
-        ].sort            
-            expect(@white_rook_center.generate_bottom_column([4,3])).to eq expected
+                [4, 2],
+                [5, 2],
+                [6, 2]].sort            
+            expect(@white_rook_center.generate_bottom_column(@white_rook_center.current_pos, @board)).to eq expected
         end
         
-        xit "Should return correctly the bottom column of the rook if obstacle" do
+        it "Should return correctly the bottom column of the rook if obstacle" do
             @board.clear
             @board.add_piece(@white_rook_center_with_obstacle)
             @board.add_piece(@obstacle_rook)
@@ -125,7 +124,7 @@ describe "A Rook in general" do
 
         
 
-        xit "Should have a correct moves array if there is an obstacle" do
+        it "Should have a correct moves array if there is an obstacle" do
             @board.clear
             @board.add_piece(@white_rook_center_with_obstacle)
             @board.add_piece(@obstacle_rook)

@@ -37,7 +37,7 @@ class Rook < Piece
         super    
     end
 
-    def generate_top_column(pos, board)
+    def generate_top_column(pos, board=@board)
         return [] if board.grid[pos[0] - 1][pos[1]] != "."
         result = []        
         pos[0].times do           
@@ -53,32 +53,50 @@ class Rook < Piece
         result.sort
     end
 
-    def generate_bottom_column(pos)
-        result = []
-        8.times do    
-            break if board.grid[pos[0]][pos[1]] != "." && board.grid[pos[0]][pos[1]] != @symbol
-            pos = [pos[0] + 1, pos[1]]             
-            inside?(pos) ? result.push(pos) : break                 
+    def generate_bottom_column(pos, board=@board)
+        return [] if board.grid[pos[0] + 1][pos[1]] != "."
+        result = []        
+        pos[0].times do           
+            pos = [pos[0] + 1, pos[1]]
+            if inside?(pos)
+                if board.grid[pos[0]][pos[1]] == "."
+                    result << pos
+                else
+                    return result.sort
+                end
+            end
         end
         result.sort
     end
 
-    def generate_left_row(pos)
-        result = []
-        8.times do
-            break if board.grid[pos[0]][pos[1]] != "." && board.grid[pos[0]][pos[1]] != @symbol
+    def generate_left_row(pos, board = @board)
+        return [] if board.grid[pos[0]][pos[1] - 1] != "."
+        result = []        
+        pos[0].times do           
             pos = [pos[0], pos[1] - 1]
-            inside?(pos) ? result << pos : break
+            if inside?(pos)
+                if board.grid[pos[0]][pos[1]] == "."
+                    result << pos
+                else
+                    return result.sort
+                end
+            end
         end
         result.sort
     end
 
     def generate_right_row(pos)
-        result = []
-        8.times do
-            break if board.grid[pos[0]][pos[1]] != "." && board.grid[pos[0]][pos[1]] != @symbol
+        return [] if board.grid[pos[0]][pos[1] + 1] != "."
+        result = []        
+        pos[0].times do           
             pos = [pos[0], pos[1] + 1]
-            inside?(pos) ? result << pos : break
+            if inside?(pos)
+                if board.grid[pos[0]][pos[1]] == "."
+                    result << pos
+                else
+                    return result.sort
+                end
+            end
         end
         result.sort
     end
