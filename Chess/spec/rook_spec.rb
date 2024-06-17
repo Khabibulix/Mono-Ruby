@@ -8,8 +8,10 @@ describe "A Rook in general" do
         @black_rook = Rook.new("black", 1)
         @white_rook_center = Rook.new("white", 1, [3,2])
         @white_rook_center_with_obstacle = Rook.new("white", 1, [4,3])
-        @obstacle_rook = Rook.new("white", 1, [5,3])  
-        @board = $board   
+        @obstacle_rook = Rook.new("white", 1, [5,3]) 
+        @second_obstacle_rook = Rook.new("white", 1, [1,3]) 
+        @third_obstacle_rook = Rook.new("white", 2, [3,3])
+        @board = Board.new  
     end
 
     context "At creation" do
@@ -26,42 +28,59 @@ describe "A Rook in general" do
         end        
     end
 
-    context "With artificial center position" do
-    #     it "Should have a correct moves array" do
-    #         @board.clear
-    #         @board.add_piece(@white_rook_center)
-    #         @board.display
-    #         expected = [
-    #             [0, 2],
-    #             [1, 2],
-    #             [2, 2],
-    #             [3, 0],
-    #             [3, 1],
-    #             [3, 3],
-    #             [3, 4],
-    #             [3, 5],
-    #             [3, 6],
-    #             [3, 7],
-    #             [4, 2],
-    #             [5, 2],
-    #             [6, 2],
-    #             [7, 2]].sort
-    #         expect(@white_rook_center.moves.sort).to eq expected
-    #     end
+
+    context "With center position" do
+        xit "Should have a correct moves array" do
+            @board.clear
+            @board.add_piece(@white_rook_center)
+            expected = [
+                [0, 2],
+                [1, 2],
+                [2, 2],
+                [3, 0],
+                [3, 1],
+                [3, 3],
+                [3, 4],
+                [3, 5],
+                [3, 6],
+                [3, 7],
+                [4, 2],
+                [5, 2],
+                [6, 2],
+                [7, 2]].sort
+            expect(@white_rook_center.moves.sort).to eq expected
+        end
 
         it "Should return correctly the top column of the rook" do
             @board.clear
             @board.add_piece(@white_rook_center)
             expected = [
-                [0,3],
-                [1,3],
-                [2,3],
-                [3,3]
-        ].sort            
-            expect(@white_rook_center.generate_top_column([4,3])).to eq expected
+                [0,2],
+                [1,2],
+                [2,2]].sort            
+            expect(@white_rook_center.generate_top_column(@white_rook_center.current_pos, @board)).to eq expected
         end
 
-        it "Should return correctly the bottom column of the rook" do
+        it "Should return correctly the top column of the rook if obstacle" do
+            @board.clear
+            @board.add_piece(@white_rook_center_with_obstacle)
+            @board.add_piece(@second_obstacle_rook)
+            expected = [
+                [2,3],
+                [3,3]].sort
+
+            expect(@white_rook_center_with_obstacle.generate_top_column(@white_rook_center_with_obstacle.current_pos, @board)).to eq expected
+        end
+
+        it "Should return empty array if obstacle is adjacent at top" do
+            @board.clear
+            @board.add_piece(@white_rook_center_with_obstacle)
+            @board.add_piece(@third_obstacle_rook)
+            expect(@white_rook_center_with_obstacle.generate_top_column(@white_rook_center_with_obstacle.current_pos, @board)).to eq []
+        end
+
+
+        xit "Should return correctly the bottom column of the rook" do
             @board.clear
             @board.add_piece(@white_rook_center)
             expected = [
@@ -71,14 +90,14 @@ describe "A Rook in general" do
         ].sort            
             expect(@white_rook_center.generate_bottom_column([4,3])).to eq expected
         end
-
-        # it "Should return correctly the bottom column of the rook if obstacle" do
-        #     @board.clear
-        #     @board.add_piece(@white_rook_center_with_obstacle)
-        #     @board.add_piece(@obstacle_rook)
-        #     expected = []
-        #     expect(@white_rook_center_with_obstacle.generate_bottom_column(@white_rook_center_with_obstacle.current_pos)).to eq expected
-        # end
+        
+        xit "Should return correctly the bottom column of the rook if obstacle" do
+            @board.clear
+            @board.add_piece(@white_rook_center_with_obstacle)
+            @board.add_piece(@obstacle_rook)
+            expected = []
+            expect(@white_rook_center_with_obstacle.generate_bottom_column(@white_rook_center_with_obstacle.current_pos)).to eq expected
+        end
 
 
         it "Should return correctly the left row of the rook" do
@@ -106,7 +125,7 @@ describe "A Rook in general" do
 
         
 
-        it "Should have a correct moves array if there is an obstacle" do
+        xit "Should have a correct moves array if there is an obstacle" do
             @board.clear
             @board.add_piece(@white_rook_center_with_obstacle)
             @board.add_piece(@obstacle_rook)

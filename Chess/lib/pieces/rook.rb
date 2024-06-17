@@ -1,4 +1,5 @@
 require_relative 'piece'
+require_relative '../board'
 
 
 class Rook < Piece
@@ -15,7 +16,7 @@ class Rook < Piece
         #If not we take it from possible_pos via number
         @initial_pos = initial_pos.empty? ? (color == "white" ? @possible_pos["white"][number - 1] : @possible_pos["black"][number - 1]) : initial_pos
         @current_pos = @initial_pos
-        @moves = generate_moves
+        # @moves = generate_moves
         @board = $board
 
     end
@@ -36,12 +37,18 @@ class Rook < Piece
         super    
     end
 
-    def generate_top_column(pos)
-        result = []
-        8.times do
-            break if board.grid[pos[0]][pos[1]] != "." && board.grid[pos[0]][pos[1]] != @symbol
+    def generate_top_column(pos, board)
+        return [] if board.grid[pos[0] - 1][pos[1]] != "."
+        result = []        
+        pos[0].times do           
             pos = [pos[0] - 1, pos[1]]
-            inside?(pos) ? result << pos : break
+            if inside?(pos)
+                if board.grid[pos[0]][pos[1]] == "."
+                    result << pos
+                else
+                    return result.sort
+                end
+            end
         end
         result.sort
     end
@@ -76,10 +83,9 @@ class Rook < Piece
         result.sort
     end
 
-    def generate_moves
-        row = generate_left_row(current_pos) + generate_right_row(current_pos)
-        col = generate_top_column(current_pos) + generate_bottom_column(current_pos)
-        (row + col).sort
-    end
+    # def generate_moves
+    #     row = generate_left_row(current_pos) + generate_right_row(current_pos)
+    #     col = generate_top_column(current_pos) + generate_bottom_column(current_pos)
+    #     (row + col).sort
+    # end
 end
-
