@@ -146,7 +146,7 @@ describe "A Rook in general" do
 
         
 
-        xit "Should have a correct moves array if there is an obstacle" do
+        it "Should have a correct moves array if there is an obstacle" do
             @board.clear
             @board.add_piece(@white_rook_center_with_obstacle)
             @board.add_piece(@obstacle_rook)
@@ -163,7 +163,7 @@ describe "A Rook in general" do
                 [4, 6],
                 [4, 7],
                 [5,3]].sort
-            expect(@white_rook_center_with_obstacle.moves.sort).to eq expected
+            expect(@white_rook_center_with_obstacle.generate_moves(@board)).to eq expected
         end
     end
 
@@ -176,22 +176,25 @@ describe "A Rook in general" do
             expect(@white_rook1.valid?([7,0], [7,3])).to be true
         end
 
-        xit "Should not move if there is an obstacle" do
-            #white_rook initial pos in [4,3]
-            @white_rook_center.move([6,3])
-            #because there is @obstacle_enemy_rook in [5,3]
-            expect(@white_rook_center.board.grid[6][3]).to eq "."
+        it "Should not move if there is an obstacle" do
+            @board.clear
+            @board.add_piece(@white_rook_center_with_obstacle)
+            @board.add_piece(@third_obstacle_rook)
+            @white_rook_center_with_obstacle.move([2,3])
+            expect(@white_rook_center.board.grid[2][3]).to eq "."
         end
             
 
         it "Should change cell value after moving" do            
            @white_rook_center.move([3,3])
-            expect(@white_rook_center.board.grid[3][3]).to eq "\u265C"
+            expect(@white_rook_center.board.grid[3][3]).to eq @white_rook_center.symbol
         end
 
         it "Should change current position after moving" do
-            @white_rook_center.move([4,3])
-            expect(@white_rook_center.current_pos).to eq [4,3]
+            @board.clear
+            @board.add_piece(@white_rook_center)
+            @white_rook_center.move([5,2])
+            expect(@white_rook_center.current_pos).to eq [5,2]
         end
     end
 end

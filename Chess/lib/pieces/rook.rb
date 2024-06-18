@@ -30,7 +30,12 @@ class Rook < Piece
     end
 
     def move(next_pos)
-        super
+        if moves.include?(next_pos)
+            if valid?(@current_pos, next_pos)
+                @current_pos = next_pos
+                @board.update_cell(next_pos, @symbol)
+            end
+        end
     end
 
     def to_s
