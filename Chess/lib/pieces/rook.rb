@@ -16,7 +16,7 @@ class Rook < Piece
         #If not we take it from possible_pos via number
         @initial_pos = initial_pos.empty? ? (color == "white" ? @possible_pos["white"][number - 1] : @possible_pos["black"][number - 1]) : initial_pos
         @current_pos = @initial_pos
-        # @moves = generate_moves
+        @moves = generate_moves
         @board = $board
 
     end
@@ -38,9 +38,8 @@ class Rook < Piece
     end
 
     def generate_top_column(pos, board=@board)
-        return [] if board.grid[pos[0] - 1][pos[1]] != "."
         result = []        
-        pos[0].times do           
+        7.times do           
             pos = [pos[0] - 1, pos[1]]
             if inside?(pos)
                 if board.grid[pos[0]][pos[1]] == "."
@@ -54,9 +53,8 @@ class Rook < Piece
     end
 
     def generate_bottom_column(pos, board=@board)
-        return [] if board.grid[pos[0] + 1][pos[1]] != "."
         result = []        
-        pos[0].times do           
+        7.times do           
             pos = [pos[0] + 1, pos[1]]
             if inside?(pos)
                 if board.grid[pos[0]][pos[1]] == "."
@@ -70,9 +68,8 @@ class Rook < Piece
     end
 
     def generate_left_row(pos, board = @board)
-        return [] if board.grid[pos[0]][pos[1] - 1] != "."
         result = []        
-        pos[0].times do           
+        7.times do           
             pos = [pos[0], pos[1] - 1]
             if inside?(pos)
                 if board.grid[pos[0]][pos[1]] == "."
@@ -86,9 +83,8 @@ class Rook < Piece
     end
 
     def generate_right_row(pos, board = @board)
-        return [] if board.grid[pos[0]][pos[1] + 1] != "."
         result = []        
-        pos[0].times do           
+        7.times do           
             pos = [pos[0], pos[1] + 1]
             if inside?(pos)
                 if board.grid[pos[0]][pos[1]] == "."
@@ -101,9 +97,11 @@ class Rook < Piece
         result.sort
     end
 
-    # def generate_moves
-    #     row = generate_left_row(current_pos) + generate_right_row(current_pos)
-    #     col = generate_top_column(current_pos) + generate_bottom_column(current_pos)
-    #     (row + col).sort
-    # end
+    def generate_moves(board = @board)
+        row = generate_left_row(current_pos, board) + generate_right_row(current_pos, board)
+        col = generate_top_column(current_pos, board) + generate_bottom_column(current_pos, board)
+        (row + col).sort
+    end
 end
+
+
