@@ -85,7 +85,7 @@ class Rook < Piece
         result.sort
     end
 
-    def generate_right_row(pos)
+    def generate_right_row(pos, board = @board)
         return [] if board.grid[pos[0]][pos[1] + 1] != "."
         result = []        
         pos[0].times do           

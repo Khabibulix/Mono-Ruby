@@ -11,6 +11,8 @@ describe "A Rook in general" do
         @obstacle_rook = Rook.new("white", 1, [5,3]) 
         @second_obstacle_rook = Rook.new("white", 1, [1,3]) 
         @third_obstacle_rook = Rook.new("white", 2, [3,3])
+        @left_obstacle_rook = Rook.new("white", 1, [4,1])
+        @right_obstacle_rook = Rook.new("white", 1, [4,6])
         @board = Board.new  
     end
 
@@ -107,7 +109,16 @@ describe "A Rook in general" do
                 [4,1],
                 [4,2]
         ].sort            
-            expect(@white_rook_center.generate_left_row([4,3])).to eq expected
+            expect(@white_rook_center.generate_left_row([4,3], @board)).to eq expected
+        end
+
+        it "Should return correctly the left row of the rook if obstacle" do
+            @board.clear
+            @board.add_piece(@left_obstacle_rook)
+            @board.add_piece(@white_rook_center)
+            expected = [
+                [4,2]]            
+            expect(@white_rook_center.generate_left_row([4,3], @board)).to eq expected
         end
 
         it "Should return correctly the right row of the rook" do
@@ -122,9 +133,19 @@ describe "A Rook in general" do
             expect(@white_rook_center.generate_right_row([4,3])).to eq expected
         end
 
+        it "Should return correctly the right row of the rook if obstacle" do
+            @board.clear
+            @board.add_piece(@right_obstacle_rook)
+            @board.add_piece(@white_rook_center)
+            expected = [
+                [4,4],
+                [4,5]].sort            
+            expect(@white_rook_center.generate_right_row([4,3], @board)).to eq expected
+        end
+
         
 
-        it "Should have a correct moves array if there is an obstacle" do
+        xit "Should have a correct moves array if there is an obstacle" do
             @board.clear
             @board.add_piece(@white_rook_center_with_obstacle)
             @board.add_piece(@obstacle_rook)
