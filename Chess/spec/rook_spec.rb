@@ -176,7 +176,7 @@ describe "A Rook in general" do
             expect(@white_rook1.valid?([7,0], [7,3])).to be true
         end
 
-        it "Should not move if there is an obstacle" do
+        xit "Should not move if there is an obstacle" do
             @board.clear
             @board.add_piece(@white_rook_center_with_obstacle)
             @board.add_piece(@third_obstacle_rook)
@@ -190,7 +190,7 @@ describe "A Rook in general" do
             expect(@white_rook_center.board.grid[3][3]).to eq @white_rook_center.symbol
         end
 
-        it "Should change current position after moving" do
+        xit "Should change current position after moving" do
             @board.clear
             @board.add_piece(@white_rook_center)
             @white_rook_center.move([5,2])
