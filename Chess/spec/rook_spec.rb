@@ -3,17 +3,18 @@ require_relative '../lib/board'
 
 describe "A Rook in general" do
     before(:all) do
-        @white_rook1 = Rook.new("white", 1)
-        @white_rook2 = Rook.new("white", 2)
-        @black_rook = Rook.new("black", 1)
-        @white_rook_center = Rook.new("white", 1, [3,2])
-        @white_rook_center_with_obstacle = Rook.new("white", 1, [4,3])
-        @obstacle_rook = Rook.new("white", 1, [6,3]) 
-        @second_obstacle_rook = Rook.new("white", 1, [1,3]) 
-        @third_obstacle_rook = Rook.new("white", 2, [3,3])
-        @fourth_obstacle_rook = Rook.new("white", 2, [4,1])
-        @right_obstacle_rook = Rook.new("white", 1, [3,5])
         @board = Board.new  
+        @white_rook1 = Rook.new("white", 1, @board)
+        @white_rook2 = Rook.new("white", 2, @board)
+        @black_rook = Rook.new("black", 1, @board)
+        @white_rook_center = Rook.new("white", 1, [3,2], @board)
+        @white_rook_center_with_obstacle = Rook.new("white", 1, [4,3], @board)
+        @obstacle_rook = Rook.new("white", 1, [6,3], @board) 
+        @second_obstacle_rook = Rook.new("white", 1, [1,3], @board) 
+        @third_obstacle_rook = Rook.new("white", 2, [3,3], @board)
+        @fourth_obstacle_rook = Rook.new("white", 2, [4,1], @board)
+        @right_obstacle_rook = Rook.new("white", 1, [3,5], @board)
+        
     end
 
     context "At creation" do
@@ -28,6 +29,14 @@ describe "A Rook in general" do
         it "Should have different position when same color" do
             expect(@white_rook1.initial_pos).not_to eq @white_rook2.initial_pos
         end        
+    end
+
+    context "When generating moves" do
+        it "Should have a moves array that is equal to generates_move for file board" do
+            @board.clear
+            @board.add_piece(@white_rook_center)
+            expect(@white_rook_center.moves).to eq @white_rook_center.generate_moves(@board)
+        end
     end
 
 
@@ -176,7 +185,7 @@ describe "A Rook in general" do
             expect(@white_rook1.valid?([7,0], [7,3])).to be true
         end
 
-        xit "Should not move if there is an obstacle" do
+        it "Should not move if there is an obstacle" do
             @board.clear
             @board.add_piece(@white_rook_center_with_obstacle)
             @board.add_piece(@third_obstacle_rook)

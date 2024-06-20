@@ -52,7 +52,7 @@ describe "A Queen in general" do
                 [4,5],
                 [4,6],
                 [4,7]].sort
-            expect(@queen_at_center.moves).to eq expected
+            expect(@queen_at_center.generate_moves(@board)).to eq expected
         end
     end
 

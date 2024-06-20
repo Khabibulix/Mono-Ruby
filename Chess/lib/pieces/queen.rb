@@ -1,6 +1,7 @@
 require_relative 'piece'
 require_relative 'rook'
 require_relative 'bishop'
+require_relative '../board'
 
 
 class Queen < Piece
@@ -12,11 +13,12 @@ class Queen < Piece
         @initial_pos = initial_pos.empty? ? (color == "white" ? [7,3] : [0,3]) : initial_pos
         @current_pos = @initial_pos
         @moves = generate_moves
+        @board = $board
     end
     
-    def generate_moves
-        moves_for_bishop = Bishop.new("white", 1 , current_pos).generate_moves
-        moves_for_rook = Rook.new("white", 1, current_pos).generate_moves
+    def generate_moves#(board = @board)
+        moves_for_bishop = Bishop.new("white", 1 , current_pos).generate_moves#(board)
+        moves_for_rook = Rook.new("white", 1, current_pos).generate_moves#(board)
         return (moves_for_bishop + moves_for_rook).sort.uniq
     end
 
