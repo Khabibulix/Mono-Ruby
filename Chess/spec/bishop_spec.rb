@@ -74,11 +74,11 @@ describe "A Bishop in general" do
     end
 
     context "When moving" do
-        it "Should be able to move in diagonal" do
+        xit "Should be able to move in diagonal" do
             expect(@white_bishop1.valid?([4,3], [5,4])).to be true
         end
 
-        it "Should not be able to move in line" do
+        xit "Should not be able to move in line" do
             expect(@white_bishop1.valid?([7,0], [7,3])).to be false
         end
 

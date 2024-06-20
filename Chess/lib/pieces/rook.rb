@@ -27,12 +27,12 @@ class Rook < Piece
         return true ? current[0] == next_pos[0] || current[1] == next_pos[1] : false
     end
 
-    def move(next_pos, board = @board)
-        if moves.include?(next_pos)
+    def move(next_pos)
+        if generate_moves.include?(next_pos)
             p "included"
-            if valid?(@current_pos, next_pos)
+            if valid?(current_pos, next_pos)
                 p "valid"
-                @current_pos = next_pos
+                current_pos = next_pos
                 @board.update_cell(next_pos, @symbol)
             end
         end
@@ -42,7 +42,7 @@ class Rook < Piece
         super    
     end
 
-    def generate_top_column(pos, board=@board)
+    def generate_top_column(pos, board=@board)        
         result = []        
         7.times do           
             pos = [pos[0] - 1, pos[1]]
@@ -108,6 +108,3 @@ class Rook < Piece
         (row + col).sort
     end
 end
-
-
-r = Rook.new("white", 1, [4,3])

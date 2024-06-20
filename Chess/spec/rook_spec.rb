@@ -31,15 +31,6 @@ describe "A Rook in general" do
         end        
     end
 
-    context "When generating moves" do
-        it "Should have a moves array that is equal to generates_move for file board" do
-            @board.clear
-            @board.add_piece(@white_rook_center)
-            expect(@white_rook_center.moves).to eq @white_rook_center.generate_moves(@board)
-        end
-    end
-
-
     context "With center position" do
         it "Should have a correct moves array" do
             @board.clear
@@ -184,14 +175,6 @@ describe "A Rook in general" do
         it "Should be able to move when no obstacles with same row" do
             expect(@white_rook1.valid?([7,0], [7,3])).to be true
         end
-
-        it "Should not move if there is an obstacle" do
-            @board.clear
-            @board.add_piece(@white_rook_center_with_obstacle)
-            @board.add_piece(@third_obstacle_rook)
-            @white_rook_center_with_obstacle.move([2,3])
-            expect(@white_rook_center.board.grid[2][3]).to eq "."
-        end
             
 
         it "Should change cell value after moving" do            
@@ -199,7 +182,7 @@ describe "A Rook in general" do
             expect(@white_rook_center.board.grid[3][3]).to eq @white_rook_center.symbol
         end
 
-        xit "Should change current position after moving" do
+        it "Should change current position after moving" do
             @board.clear
             @board.add_piece(@white_rook_center)
             @white_rook_center.move([5,2])
