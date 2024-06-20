@@ -10,7 +10,7 @@ class Queen < Piece
         super
         @color = color
         @symbol = (color == "white" ? "\u2655" : "\u265B").encode
-        @initial_pos = initial_pos.empty? ? (color == "white" ? [7,3] : [0,3]) : initial_pos
+        @initial_pos = initial_pos.empty? ? (color == "white" ? [0,3] : [7,3]) : initial_pos
         @current_pos = @initial_pos
         @moves = generate_moves
         @board = $board

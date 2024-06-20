@@ -8,8 +8,8 @@ class Bishop < Piece
         @color = color
         @symbol = (color == "white" ? "\u2657" : "\u265D").encode
         @possible_pos = {
-            "white" => [[7,2],[7,5]],
-            "black" => [[0,2], [0,5]]
+            "white" => [[0,2], [0,5]], 
+            "black" => [[7,2],[7,5]]
         }
         @initial_pos = initial_pos.empty? ? (color == "white" ? @possible_pos["white"][number - 1] : @possible_pos["black"][number - 1]) : initial_pos
         @current_pos = @initial_pos
