@@ -184,9 +184,8 @@ describe "A Rook in general" do
 
         it "Should change current position after moving" do
             @board.clear
-            @board.add_piece(@white_rook_center)
-            @white_rook_center.move([5,2])
-            expect(@white_rook_center.current_pos).to eq [5,2]
+            @board.add_piece(@white_rook_center)            
+            expect(@white_rook_center.move([5,2])).to eq [5,2]
         end
     end
 end

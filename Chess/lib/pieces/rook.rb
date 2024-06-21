@@ -36,6 +36,7 @@ class Rook < Piece
                 @board.update_cell(next_pos, @symbol)
             end
         end
+        current_pos
     end
 
     def to_s
