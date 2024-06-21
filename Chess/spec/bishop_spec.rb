@@ -4,22 +4,24 @@ require_relative '../lib/board'
 describe "A Bishop in general" do
     before(:all) do
         @board = Board.new
-        @white_bishop = Bishop.new("white", 1, [4,3])
+        @white_bishop_default_pos = Bishop.new("white", 1)
+        @white_bishop_two_default_pos = Bishop.new("white", 2)
+        @white_bishop = Bishop.new("white", 1, [4,3])        
         @obstacle_bishop = Bishop.new("white", 2, [3,4])
         @black_bishop = Bishop.new("black", 1)
     end
 
     context "At creation" do
         it "Should have different symbols if differents colors" do
-            expect(@white_bishop1.symbol).not_to eq @black_bishop.symbol
+            expect(@white_bishop_default_pos.symbol).not_to eq @black_bishop.symbol
         end
 
         it "Should have different position when different color" do
-            expect(@white_bishop1.initial_pos).not_to eq @black_bishop.initial_pos
+            expect(@white_bishop_default_pos.initial_pos).not_to eq @black_bishop.initial_pos
         end
 
         it "Should have different position when same color" do
-            expect(@white_bishop1.initial_pos).not_to eq @white_bishop2.initial_pos
+            expect(@white_bishop_default_pos.initial_pos).not_to eq @white_bishop_two_default_pos.initial_pos
         end
         
     end
@@ -49,11 +51,41 @@ describe "A Bishop in general" do
             @board.add_piece(@white_bishop)
             expected = [
                 [3,4],
-                [2,3],
-                [1,2],
-                [0,1]
+                [2,5],
+                [1,6],
+                [0,7]
         ].sort
-            expect(@white_bishop.generate_top_right_diagonal).to eq expected
+            expect(@white_bishop.generate_top_right_diagonal(@white_bishop.initial_pos)).to eq expected
+        end
+
+        it "Should have a correct top left diagonal without obstacle" do
+            @board.clear
+            @board.add_piece(@white_bishop)
+            expected = [
+                [3,2],
+                [2,1],
+                [1,0]].sort
+            expect(@white_bishop.generate_top_left_diagonal(@white_bishop.initial_pos)).to eq expected
+        end
+
+        it "Should have a correct bottom right diagonal without obstacle" do
+            @board.clear
+            @board.add_piece(@white_bishop)
+            expected = [
+                [5,4],
+                [6,5],
+                [7,6]].sort
+            expect(@white_bishop.generate_right_bottom_diagonal(@white_bishop.initial_pos)).to eq expected
+        end
+
+        it "Should have a correct bottom left diagonal without obstacle" do
+            @board.clear
+            @board.add_piece(@white_bishop)
+            expected = [
+                [5,2],
+                [6,1],
+                [7,0]].sort
+            expect(@white_bishop.generate_left_bottom_diagonal(@white_bishop.initial_pos)).to eq expected
         end
     end
 
@@ -89,11 +121,11 @@ describe "A Bishop in general" do
 
     context "When moving" do
         it "Should be able to move in diagonal" do
-            expect(@white_bishop1.valid?([4,3], [5,4])).to be true
+            expect(@white_bishop.valid?([4,3], [5,4])).to be true
         end
 
         it "Should not be able to move in line" do
-            expect(@white_bishop1.valid?([7,0], [7,3])).to be false
+            expect(@white_bishop.valid?([7,0], [7,3])).to be false
         end
 
         it "Should change cell value after moving" do

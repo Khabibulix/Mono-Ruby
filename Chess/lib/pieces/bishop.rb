@@ -32,67 +32,48 @@ class Bishop < Piece
         super    
     end
 
-    def generate_top_left_diagonal(pos)
+    def generate_top_left_diagonal(pos = current_pos, board = @board)
+		result = []
         8.times do
             pos = [pos[0] - 1, pos[1] - 1]
-            inside?(pos) ? moves << pos : break                       
+            inside?(pos) ? result << pos : break                       
         end
+		result.sort
     end
 
-    def generate_top_right_diagonal(pos)
+    def generate_top_right_diagonal(pos = current_pos, board = @board)
+        result = []
         8.times do
             pos = [pos[0] - 1, pos[1] + 1]
-            inside?(pos) ? moves << pos : break
+            inside?(pos) ? result << pos : break
         end
+        result.sort
     end
 
-    def generate_left_bottom_diagonal(pos)
+    def generate_left_bottom_diagonal(pos = current_pos, board = @board)
+        result = []
         8.times do
             pos = [pos[0] + 1, pos[1] - 1]
-            inside?(pos) ? moves << pos : break
+            inside?(pos) ? result << pos : break
         end
+        result
     end
 
-    def generate_right_bottom_diagonal(pos)
+    def generate_right_bottom_diagonal(pos = current_pos, board = @board)
+        result = []
         8.times do
             pos = [pos[0] + 1, pos[1] + 1]
-            inside?(pos) ? moves << pos : break
+            inside?(pos) ? result << pos : break
         end
+        result
     end
     
-    def generate_moves     
-        pos = initial_pos
-
-
-        if pos[1] != 0
-            #Left top
-            if pos[0] != 0                
-                generate_top_left_diagonal(pos)                
-            end
-
-            pos = initial_pos
-
-            if pos[0] != 7
-                #Left bottom diagonal
-                generate_left_bottom_diagonal(pos)    
-            end   
-        end
-
-        if pos[1] != 7
-            if pos[0] != 0
-                #Right top
-                generate_top_right_diagonal(pos)                
-            end
-
-            pos = initial_pos
-
-            if pos[0] != 7
-                #Right bottom diagonal
-                generate_right_bottom_diagonal(pos)
-            end
-        end
-
-        moves.delete_at(moves.find_index(initial_pos)) if moves.include?(initial_pos)
-        return moves.sort.uniq
+    def generate_moves    
+        left_diagonal = generate_top_left_diagonal(current_pos) + generate_left_bottom_diagonal(current_pos)              
+        right_diagonal = generate_top_right_diagonal(current_pos) + generate_right_bottom_diagonal(current_pos)
+        (left_diagonal + right_diagonal).sort
     end
 end
+
+b = Bishop.new("white", 1, [4,2])
+p b.generate_moves
