@@ -1,14 +1,16 @@
 require_relative '../lib/pieces/bishop'
+require_relative '../lib/board'
 
 describe "A Bishop in general" do
     before(:all) do
-        @white_bishop1 = Bishop.new("white", 1)
-        @white_bishop2 = Bishop.new("white", 2)
+        @board = Board.new
+        @white_bishop = Bishop.new("white", 1, [4,3])
+        @obstacle_bishop = Bishop.new("white", 2, [3,4])
         @black_bishop = Bishop.new("black", 1)
     end
 
     context "At creation" do
-        it "Should have differents symbols if differents colors" do
+        it "Should have different symbols if differents colors" do
             expect(@white_bishop1.symbol).not_to eq @black_bishop.symbol
         end
 
@@ -40,6 +42,18 @@ describe "A Bishop in general" do
                 [6,5],
                 [7,6]].sort
             expect(bishop_at_center.moves).to eq expected
+        end
+
+        it "Should have a correct top right diagonal without obstacle" do
+            @board.clear
+            @board.add_piece(@white_bishop)
+            expected = [
+                [3,4],
+                [2,3],
+                [1,2],
+                [0,1]
+        ].sort
+            expect(@white_bishop.generate_top_right_diagonal).to eq expected
         end
     end
 
@@ -74,11 +88,11 @@ describe "A Bishop in general" do
     end
 
     context "When moving" do
-        xit "Should be able to move in diagonal" do
+        it "Should be able to move in diagonal" do
             expect(@white_bishop1.valid?([4,3], [5,4])).to be true
         end
 
-        xit "Should not be able to move in line" do
+        it "Should not be able to move in line" do
             expect(@white_bishop1.valid?([7,0], [7,3])).to be false
         end
 

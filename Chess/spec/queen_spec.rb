@@ -21,7 +21,7 @@ describe "A Queen in general" do
     end
 
     context "At center" do
-        xit "Should have a correct moves array" do
+        it "Should have a correct moves array" do
             @board.clear
             @board.add_piece(@queen_at_center)
             expected = [
