@@ -32,11 +32,19 @@ class Bishop < Piece
         super    
     end
 
+    def check_for_obstacle(pos)
+        
+    end
+
     def generate_top_left_diagonal(pos = current_pos, board = @board)
 		result = []
         8.times do
             pos = [pos[0] - 1, pos[1] - 1]
-            inside?(pos) ? result << pos : break                       
+            if inside?(pos) && board.grid[pos[0]][pos[1]] == "."
+                result << pos
+            else
+                return result.sort
+            end                  
         end
 		result.sort
     end
@@ -45,7 +53,11 @@ class Bishop < Piece
         result = []
         8.times do
             pos = [pos[0] - 1, pos[1] + 1]
-            inside?(pos) ? result << pos : break
+            if inside?(pos) && board.grid[pos[0]][pos[1]] == "."
+                result << pos
+            else
+                return result.sort
+            end
         end
         result.sort
     end
@@ -54,16 +66,24 @@ class Bishop < Piece
         result = []
         8.times do
             pos = [pos[0] + 1, pos[1] - 1]
-            inside?(pos) ? result << pos : break
+            if inside?(pos) && board.grid[pos[0]][pos[1]] == "."
+                result << pos
+            else
+                return result.sort
+            end
         end
-        result
+        result.sort
     end
 
     def generate_right_bottom_diagonal(pos = current_pos, board = @board)
         result = []
         8.times do
             pos = [pos[0] + 1, pos[1] + 1]
-            inside?(pos) ? result << pos : break
+            if inside?(pos) && board.grid[pos[0]][pos[1]] == "."
+                result << pos
+            else
+                return result.sort
+            end
         end
         result
     end
@@ -74,6 +94,3 @@ class Bishop < Piece
         (left_diagonal + right_diagonal).sort
     end
 end
-
-b = Bishop.new("white", 1, [4,2])
-p b.generate_moves

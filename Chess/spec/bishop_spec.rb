@@ -12,6 +12,7 @@ describe "A Bishop in general" do
         @obstacle_bishop_top_right = Bishop.new("white", 2, [1,6])
         @obstacle_bishop_bottom_left = Bishop.new("white", 2, [5,2])
         @obstacle_bishop_bottom_right = Bishop.new("white", 2, [5,6])
+        @adjacent_bishop = Bishop.new("white", 2, [2,3])
         @black_bishop = Bishop.new("black", 1)
     end
 
@@ -100,6 +101,14 @@ describe "A Bishop in general" do
             expect(@white_bishop.generate_right_bottom_diagonal(@white_bishop.initial_pos)).to eq expected
         end
 
+        it "Should have a correct bottom right diagonal with obstacle" do
+            @board.clear
+            @board.add_piece(@white_bishop_with_obstacle)
+            @board.add_piece(@obstacle_bishop_bottom_right)
+            expected = [[4,5]]
+            expect(@white_bishop_with_obstacle.generate_right_bottom_diagonal(@white_bishop_with_obstacle.initial_pos, @board)).to eq expected
+        end
+
         it "Should have a correct bottom left diagonal without obstacle" do
             @board.clear
             @board.add_piece(@white_bishop)
@@ -108,6 +117,21 @@ describe "A Bishop in general" do
                 [6,1],
                 [7,0]].sort
             expect(@white_bishop.generate_left_bottom_diagonal(@white_bishop.initial_pos)).to eq expected
+        end
+
+        it "Should have a correct bottom left diagonal with obstacle" do
+            @board.clear
+            @board.add_piece(@white_bishop_with_obstacle)
+            @board.add_piece(@obstacle_bishop_bottom_left)
+            expected = [[4,3]]
+            expect(@white_bishop_with_obstacle.generate_left_bottom_diagonal(@white_bishop_with_obstacle.initial_pos, @board)).to eq expected
+        end
+
+        it "Should return empty array if obstacle is adjacent" do
+            @board.clear
+            @board.add_piece(@white_bishop_with_obstacle)
+            @board.add_piece(@adjacent_bishop)
+            expect(@white_bishop_with_obstacle.generate_top_left_diagonal(@white_bishop_with_obstacle.current_pos, @board)).to eq []
         end
     end
 
