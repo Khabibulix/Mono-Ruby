@@ -6,8 +6,12 @@ describe "A Bishop in general" do
         @board = Board.new
         @white_bishop_default_pos = Bishop.new("white", 1)
         @white_bishop_two_default_pos = Bishop.new("white", 2)
-        @white_bishop = Bishop.new("white", 1, [4,3])        
-        @obstacle_bishop = Bishop.new("white", 2, [3,4])
+        @white_bishop = Bishop.new("white", 1, [4,3])   
+        @white_bishop_with_obstacle = Bishop.new("white", 1, [3,4])     
+        @obstacle_bishop_top_left = Bishop.new("white", 2, [1,2])
+        @obstacle_bishop_top_right = Bishop.new("white", 2, [1,6])
+        @obstacle_bishop_bottom_left = Bishop.new("white", 2, [5,2])
+        @obstacle_bishop_bottom_right = Bishop.new("white", 2, [5,6])
         @black_bishop = Bishop.new("black", 1)
     end
 
@@ -56,6 +60,14 @@ describe "A Bishop in general" do
                 [0,7]
         ].sort
             expect(@white_bishop.generate_top_right_diagonal(@white_bishop.initial_pos)).to eq expected
+        end
+
+        it "Should have a correct top right diagonal with obstacle" do
+            @board.clear
+            @board.add_piece(@white_bishop_with_obstacle)
+            @board.add_piece(@obstacle_bishop_top_right)
+            expected = [[2,5]]
+            expect(@white_bishop_with_obstacle.generate_top_right_diagonal(@white_bishop_with_obstacle.initial_pos, @board)).to eq expected
         end
 
         it "Should have a correct top left diagonal without obstacle" do
