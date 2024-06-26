@@ -4,7 +4,7 @@ Credits:
 https://www.theodinproject.com/lessons/ruby-connect-four
 
 
-h2>How to launch</h2><br>
+<h2>How to launch</h2><br>
 Go in main directory and type:
 <pre>ruby .\main.rb</pre>
 
