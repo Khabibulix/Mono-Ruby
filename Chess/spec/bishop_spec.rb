@@ -80,6 +80,16 @@ describe "A Bishop in general" do
             expect(@white_bishop.generate_top_left_diagonal(@white_bishop.initial_pos)).to eq expected
         end
 
+        it "Should have a correct top left diagonal with obstacle" do
+            @board.clear
+            @board.add_piece(@white_bishop_with_obstacle)
+            @board.add_piece(@obstacle_bishop_top_left)
+            expected = [[2,3]]
+            expect(@white_bishop_with_obstacle.generate_top_left_diagonal(@white_bishop_with_obstacle.initial_pos, @board)).to eq expected
+        end
+
+        
+
         it "Should have a correct bottom right diagonal without obstacle" do
             @board.clear
             @board.add_piece(@white_bishop)
